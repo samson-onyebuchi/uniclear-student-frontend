@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="View and manage students assigned to your clearance stage in UniClear."
+    />
+
+    <title>Current-Stage Students | UniClear Staff Portal</title>
+
+    <!-- Current-Stage Students Stylesheet -->
+    <link rel="stylesheet" href="css/current-stage-students.css" />
+  </head>
+
+  <body>
+    <div class="dashboard-layout current-students-layout">
+      <!-- ==================================================
+             SIDEBAR NAVIGATION
+        =================================================== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-logo" aria-hidden="true">U</div>
+
+          <div class="brand-details">
+            <h2>UniClear</h2>
+            <p>Staff Portal</p>
+          </div>
+
+          <button
+            type="button"
+            class="sidebar-close"
+            id="closeSidebarBtn"
+            aria-label="Close navigation"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="sidebar-section-label">WORKSPACE</div>
+
+        <nav class="sidebar-navigation" aria-label="Staff workspace navigation">
+          <a href="staff-dashboard.html#dashboard" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a
+            href="staff-dashboard.html#clearance-work"
+            class="nav-link active"
+            aria-current="page"
+          >
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Clearance Work</span>
+          </a>
+
+          <a href="staff-dashboard.html#stage-otp" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">⌑</span>
+            <span>Verify Stage OTP</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-section-label">ACCOUNT</div>
+
+        <nav class="sidebar-navigation" aria-label="Staff account navigation">
+          <a href="staff-dashboard.html#staff-profile" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">◉</span>
+            <span>My Profile</span>
+          </a>
+
+          <a href="staff-dashboard.html#change-password" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Change Password</span>
+          </a>
+        </nav>
+
+        <!-- Sidebar staff account -->
+        <div class="sidebar-bottom">
+          <div class="sidebar-user">
+            <div class="avatar" id="sidebarAvatar">S</div>
+
+            <div class="sidebar-user-details">
+              <strong id="sidebarStaffName">Staff Member</strong>
+              <span id="sidebarStaffRole">Clearance Officer</span>
+            </div>
+          </div>
+
+          <button type="button" class="logout-button" id="logoutBtn">
+            <span class="nav-icon" aria-hidden="true">↪</span>
+            <span>Log Out</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Mobile sidebar overlay -->
+      <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+      <!-- ==================================================
+             MAIN CONTENT
+        =================================================== -->
+      <main class="main-content">
+        <!-- Top navigation -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              type="button"
+              class="menu-toggle"
+              id="menuToggleBtn"
+              aria-label="Open navigation"
+            >
+              ☰
+            </button>
+
+            <div>
+              <p class="breadcrumb">
+                Staff Portal / Clearance Work / Current-Stage Students
+              </p>
+
+              <h1>Current-Stage Students</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-date" id="currentDate">Staff Workspace</div>
+
+            <button
+              type="button"
+              class="profile-button"
+              id="topbarProfileBtn"
+              aria-label="Open staff profile"
+            >
+              <span class="avatar avatar-small" id="topbarAvatar"> S </span>
+
+              <span class="profile-button-details">
+                <strong id="topbarStaffName"> Staff Member </strong>
+
+                <small id="topbarStaffRole"> Clearance Officer </small>
+              </span>
+
+              <span class="dropdown-arrow" aria-hidden="true"> ⌄ </span>
+            </button>
+          </div>
+        </header>
+
+        <!-- ==================================================
+                 PAGE CONTENT
+            =================================================== -->
+        <div class="content-wrapper">
+          <!-- Page introduction -->
+          <section class="page-intro" aria-labelledby="pageTitle">
+            <div>
+              <span class="eyebrow"> CLEARANCE STAGE MANAGEMENT </span>
+
+              <h2 id="pageTitle">Current-Stage Students</h2>
+
+              <p>
+                View students whose clearance records belong to your assigned
+                stage. Open each student's details to inspect documents, review
+                history and available clearance actions.
+              </p>
+            </div>
+
+            <div class="page-intro-actions">
+              <a
+                href="staff-dashboard.html#clearance-work"
+                class="button button-secondary"
+                id="backToDashboardBtn"
+              >
+                <span class="button-icon" aria-hidden="true">←</span>
+                Back to Dashboard
+              </a>
+
+              <button
+                type="button"
+                class="button button-primary"
+                id="refreshStudentsBtn"
+              >
+                <span class="button-icon" aria-hidden="true">↻</span>
+                Refresh Students
+              </button>
+            </div>
+          </section>
+
+          <!-- ==================================================
+                     NOTIFICATIONS AND PAGE STATUS
+                =================================================== -->
+
+          <div
+            class="notice notice-info"
+            id="loadingNotice"
+            role="status"
+            aria-live="polite"
+          >
+            Loading students assigned to your clearance stage…
+          </div>
+
+          <div
+            class="notice notice-error"
+            id="pageErrorNotice"
+            role="alert"
+            hidden
+          ></div>
+
+          <div
+            class="notice notice-success"
+            id="pageSuccessNotice"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <div
+            class="notice"
+            id="pageMessageNotice"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <!-- ==================================================
+                     ASSIGNED STAGE SUMMARY
+                =================================================== -->
+
+          <section
+            class="stage-summary-card"
+            aria-labelledby="assignedStageHeading"
+          >
+            <div class="stage-summary-icon" aria-hidden="true">▤</div>
+
+            <div class="stage-summary-content">
+              <span class="meta-label"> YOUR ASSIGNED CLEARANCE STAGE </span>
+
+              <h2 id="assignedStageHeading">Loading assigned stage…</h2>
+
+              <p id="assignedStageDescription">
+                Your clearance-stage assignment will appear here after your
+                staff profile has been loaded.
+              </p>
+            </div>
+
+            <div class="stage-summary-status">
+              <span class="meta-label"> ACCOUNT STATUS </span>
+
+              <span class="status-pill status-default" id="staffAccountStatus">
+                Checking account
+              </span>
+            </div>
+          </section>
+
+          <!-- ==================================================
+                     STUDENT STATISTICS
+                =================================================== -->
+
+          <section
+            class="content-section"
+            aria-labelledby="studentStatisticsHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="studentStatisticsHeading">Stage Overview</h2>
+
+                <p>
+                  Summary of the student records available for your assigned
+                  stage.
+                </p>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <!-- Students at current stage -->
+              <article class="stat-card stat-total">
+                <div class="stat-card-top">
+                  <span class="stat-label"> Current-Stage Students </span>
+
+                  <span class="stat-icon" aria-hidden="true"> ♙ </span>
+                </div>
+
+                <strong class="stat-value" id="totalStudentsCount"> — </strong>
+
+                <p>Records associated with this stage</p>
+              </article>
+
+              <!-- Pending review -->
+              <article class="stat-card stat-pending">
+                <div class="stat-card-top">
+                  <span class="stat-label"> Pending Review </span>
+
+                  <span class="stat-icon" aria-hidden="true"> ◷ </span>
+                </div>
+
+                <strong class="stat-value" id="pendingReviewCount"> — </strong>
+
+                <p>Submissions awaiting your decision</p>
+              </article>
+
+              <!-- Approved -->
+              <article class="stat-card stat-approved">
+                <div class="stat-card-top">
+                  <span class="stat-label"> Approved </span>
+
+                  <span class="stat-icon" aria-hidden="true"> ✓ </span>
+                </div>
+
+                <strong class="stat-value" id="approvedStudentsCount">
+                  —
+                </strong>
+
+                <p>Stage approvals recorded</p>
+              </article>
+
+              <!-- Rejected -->
+              <article class="stat-card stat-rejected">
+                <div class="stat-card-top">
+                  <span class="stat-label"> Rejected </span>
+
+                  <span class="stat-icon" aria-hidden="true"> ! </span>
+                </div>
+
+                <strong class="stat-value" id="rejectedStudentsCount">
+                  —
+                </strong>
+
+                <p>Submissions returned for correction</p>
+              </article>
+            </div>
+          </section>
+
+          <!-- ==================================================
+                     STUDENT RECORDS TABLE
+                =================================================== -->
+
+          <section
+            class="content-section"
+            aria-labelledby="studentRecordsHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="studentRecordsHeading">Student Records</h2>
+
+                <p>
+                  Search the records associated with your current clearance
+                  stage.
+                </p>
+              </div>
+
+              <span class="progress-count" id="studentsCount">
+                Loading records…
+              </span>
+            </div>
+
+            <!-- ==================================================
+                         SEARCH AND FILTERS
+                    =================================================== -->
+
+            <div class="filter-card">
+              <div class="filter-field">
+                <label for="studentSearch"> Search Students </label>
+
+                <input
+                  type="search"
+                  id="studentSearch"
+                  name="student_search"
+                  placeholder="Name or registration number"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="filter-field">
+                <label for="studentStatusFilter"> Submission Status </label>
+
+                <select id="studentStatusFilter" name="student_status">
+                  <option value="all">All statuses</option>
+
+                  <option value="under_review">Under review</option>
+
+                  <option value="awaiting_submission">Awaiting document</option>
+
+                  <option value="approved">Approved</option>
+
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+
+              <div class="filter-actions">
+                <button
+                  type="button"
+                  class="button button-secondary"
+                  id="resetStudentFiltersBtn"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            </div>
+
+            <!-- Record information -->
+            <div
+              class="notice notice-info"
+              id="studentListInfo"
+              role="status"
+              aria-live="polite"
+            >
+              Student records will be retrieved using your staff ID and assigned
+              clearance stage.
+            </div>
+
+            <!-- ==================================================
+                         STUDENT TABLE
+                    =================================================== -->
+
+            <div class="table-card">
+              <div class="table-toolbar">
+                <div>
+                  <h3>Students Assigned to Your Stage</h3>
+
+                  <p>
+                    Select a student to inspect their clearance record and any
+                    submitted documents.
+                  </p>
+                </div>
+
+                <span class="table-count" id="tableRecordCount">
+                  0 records
+                </span>
+              </div>
+
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Student Name</th>
+
+                      <th scope="col">Registration Number</th>
+
+                      <th scope="col">Department</th>
+
+                      <th scope="col">Faculty</th>
+
+                      <th scope="col">Document</th>
+
+                      <th scope="col">Submission Date</th>
+
+                      <th scope="col">Stage Status</th>
+
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="currentStageStudentsTableBody">
+                    <tr>
+                      <td colspan="8" class="table-empty">
+                        Loading student records…
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Table footer -->
+              <div class="table-footer">
+                <span id="tableFooterMessage">
+                  Loading current-stage students…
+                </span>
+
+                <button
+                  type="button"
+                  class="button button-secondary button-small"
+                  id="tableRefreshBtn"
+                >
+                  <span class="button-icon" aria-hidden="true"> ↻ </span>
+
+                  Refresh
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================================================
+                     WORKFLOW RULES
+                =================================================== -->
+
+          <section
+            class="content-section"
+            aria-labelledby="workflowRulesHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="workflowRulesHeading">Clearance Review Guidelines</h2>
+
+                <p>
+                  Important rules for processing student clearance submissions.
+                </p>
+              </div>
+            </div>
+
+            <div class="guidelines-grid">
+              <article class="guideline-card">
+                <div
+                  class="guideline-icon guideline-icon-blue"
+                  aria-hidden="true"
+                >
+                  ⌑
+                </div>
+
+                <div>
+                  <h3>Stage Assignment</h3>
+
+                  <p>
+                    Review only records permitted for your assigned clearance
+                    stage.
+                  </p>
+                </div>
+              </article>
+
+              <article class="guideline-card">
+                <div
+                  class="guideline-icon guideline-icon-green"
+                  aria-hidden="true"
+                >
+                  ✓
+                </div>
+
+                <div>
+                  <h3>Document Review</h3>
+
+                  <p>
+                    Approve a submission only after the student has submitted
+                    the required document and its status is under review.
+                  </p>
+                </div>
+              </article>
+
+              <article class="guideline-card">
+                <div
+                  class="guideline-icon guideline-icon-red"
+                  aria-hidden="true"
+                >
+                  !
+                </div>
+
+                <div>
+                  <h3>Rejection Reason</h3>
+
+                  <p>
+                    Provide a clear reason when rejecting a document so the
+                    student knows what must be corrected.
+                  </p>
+                </div>
+              </article>
+
+              <article class="guideline-card">
+                <div
+                  class="guideline-icon guideline-icon-purple"
+                  aria-hidden="true"
+                >
+                  →
+                </div>
+
+                <div>
+                  <h3>Stage Progression</h3>
+
+                  <p>
+                    After approval, the next-stage officer verifies the stage
+                    OTP before the student proceeds with that stage.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- ==================================================
+                     TOAST NOTIFICATIONS
+                =================================================== -->
+
+          <div
+            class="toast-container"
+            id="toastContainer"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+
+          <!-- ==================================================
+                     FOOTER
+                =================================================== -->
+
+          <footer class="dashboard-footer">
+            <p>
+              &copy;
+              <span id="footerYear"></span>
+              UniClear Student Clearance System
+            </p>
+
+            <span> Staff Portal </span>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <!-- Current-Stage Students JavaScript -->
+    <script src="js/current-stage-students.js"></script>
+  </body>
+</html>

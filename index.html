@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UniClear | University of Nigeria, Nsukka</title>
+
+    <meta
+        name="description"
+        content="UniClear is the online student clearance portal for the University of Nigeria, Nsukka. Access clearance services, submit documents and track your progress."
+    >
+
+    <meta name="theme-color" content="#102b50">
+
+    <!-- Main website styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Landing page styles -->
+    <link rel="stylesheet" href="css/landing.css">
+
+    <!-- Website icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <!-- ==================== NAVIGATION BAR ==================== -->
+    <header class="site-header" id="home">
+        <div class="container navbar">
+
+            <a href="index.html" class="brand" aria-label="UniClear home">
+                <span class="brand-logo">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </span>
+
+                <span class="brand-text">
+                    <strong>UniClear</strong>
+                    <small>UNIVERSITY OF NIGERIA, NSUKKA</small>
+                </span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="main-navigation" id="mainNavigation">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#process" class="nav-link">Clearance Process</a>
+                <a href="#benefits" class="nav-link">Benefits</a>
+
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline">
+                        Sign In
+                    </a>
+
+                    <a href="register.html" class="btn btn-primary">
+                        Create Account
+                    </a>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="hero-section">
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        <i class="fa-solid fa-building-columns"></i>
+                        UNIVERSITY OF NIGERIA, NSUKKA
+                    </span>
+
+                    <h1>
+                        Your Clearance Journey,
+                        <span>Made Simpler.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Welcome to UniClear, the online student clearance
+                        portal designed to help University of Nigeria,
+                        Nsukka students submit documents, follow clearance
+                        progress and navigate the clearance process more
+                        conveniently.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="register.html" class="btn btn-primary btn-large">
+                            Get Started
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="login.html" class="btn btn-secondary btn-large">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Access Portal
+                        </a>
+                    </div>
+
+                    <div class="hero-note">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>One portal for your clearance journey</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Portal preview card -->
+                <div class="hero-visual">
+
+                    <div class="hero-decoration decoration-one"></div>
+                    <div class="hero-decoration decoration-two"></div>
+
+                    <div class="portal-preview">
+
+                        <div class="preview-header">
+                            <div class="preview-heading">
+                                <span class="preview-icon">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </span>
+
+                                <div>
+                                    <strong>UniClear Portal</strong>
+                                    <small>Student clearance overview</small>
+                                </div>
+                            </div>
+
+                            <span class="preview-menu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </span>
+                        </div>
+
+                        <div class="preview-welcome">
+                            <span>YOUR CLEARANCE JOURNEY</span>
+                            <h2>Stay informed. Move forward.</h2>
+                            <p>
+                                Keep track of your clearance stages
+                                from one place.
+                            </p>
+                        </div>
+
+                        <div class="preview-progress">
+                            <div class="progress-heading">
+                                <span>Clearance progress</span>
+                                <strong>Track online</strong>
+                            </div>
+
+                            <div class="progress-track">
+                                <span></span>
+                            </div>
+
+                            <small>
+                                Follow submitted documents and stage updates.
+                            </small>
+                        </div>
+
+                        <div class="preview-stages">
+
+                            <div class="preview-stage">
+                                <span class="stage-icon finance">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </span>
+
+                                <div class="stage-info">
+                                    <strong>Finance</strong>
+                                    <small>Fee documentation</small>
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right stage-arrow"></i>
+                            </div>
+
+                            <div class="preview-stage">
+                                <span class="stage-icon department">
+                                    <i class="fa-solid fa-building"></i>
+                                </span>
+
+                                <div class="stage-info">
+                                    <strong>Department</strong>
+                                    <small>Departmental clearance</small>
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right stage-arrow"></i>
+                            </div>
+
+                            <div class="preview-stage">
+                                <span class="stage-icon faculty">
+                                    <i class="fa-solid fa-landmark"></i>
+                                </span>
+
+                                <div class="stage-info">
+                                    <strong>Faculty</strong>
+                                    <small>Faculty clearance</small>
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right stage-arrow"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="preview-footer">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>UniClear online clearance portal</span>
+                        </div>
+
+                    </div>
+
+                    <div class="floating-card">
+                        <span class="floating-icon">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </span>
+
+                        <div>
+                            <strong>Document tracking</strong>
+                            <small>Follow your submissions</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== PORTAL ACCESS ==================== -->
+        <section class="access-section" aria-labelledby="accessTitle">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">PORTAL ACCESS</span>
+
+                    <h2 id="accessTitle">
+                        Welcome to your clearance portal
+                    </h2>
+
+                    <p>
+                        Choose the option that matches your role at
+                        the University of Nigeria, Nsukka.
+                    </p>
+                </div>
+
+                <div class="access-grid">
+
+                    <article class="access-card student-card">
+                        <div class="access-icon">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+
+                        <h3>Student Portal</h3>
+
+                        <p>
+                            Create your student account, submit required
+                            documents and monitor your clearance progress.
+                        </p>
+
+                        <a href="register.html" class="text-link">
+                            Register as a student
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="login.html" class="secondary-link">
+                            Already registered? Sign in
+                        </a>
+                    </article>
+
+
+                    <article class="access-card staff-card">
+                        <div class="access-icon">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+
+                        <h3>Staff / Lecturer Portal</h3>
+
+                        <p>
+                            Access authorized staff services for reviewing
+                            student clearance submissions and processing
+                            assigned clearance stages.
+                        </p>
+
+                        <a href="login.html?role=staff" class="text-link">
+                            Access staff portal
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="register.html?role=staff" class="secondary-link">
+                            New staff user? Registration options
+                        </a>
+                    </article>
+
+                </div>
+
+                <p class="access-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Staff access and clearance permissions are subject
+                    to the university's account authorization process.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== ABOUT UNICLEAR ==================== -->
+        <section class="about-section" id="about">
+            <div class="container about-grid">
+
+                <div class="about-visual">
+                    <div class="about-icon-large">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+
+                    <div class="about-caption">
+                        <strong>UniClear</strong>
+                        <span>Online Student Clearance System</span>
+                        <small>University of Nigeria, Nsukka</small>
+                    </div>
+
+                    <div class="about-decoration"></div>
+                </div>
+
+                <div class="about-content">
+
+                    <span class="section-label">ABOUT UNICLEAR</span>
+
+                    <h2>
+                        A more organised approach to student clearance
+                    </h2>
+
+                    <p>
+                        UniClear is designed to bring the student clearance
+                        process into one online platform. Students can
+                        submit documents for the appropriate clearance stage
+                        and check the progress of their submissions.
+                    </p>
+
+                    <p>
+                        Authorized staff can review submissions for their
+                        assigned stages, approve eligible documents or
+                        request corrections where necessary.
+                    </p>
+
+                    <ul class="about-list">
+                        <li>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Centralised clearance information
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Online document submission
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Stage-by-stage progress monitoring
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Role-based access for students and staff
+                        </li>
+                    </ul>
+
+                    <a href="register.html" class="btn btn-primary">
+                        Create Your Account
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== CLEARANCE PROCESS ==================== -->
+        <section class="process-section" id="process">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">CLEARANCE PROCESS</span>
+
+                    <h2>
+                        Seven stages. One clearance journey.
+                    </h2>
+
+                    <p>
+                        Follow the established clearance stages and
+                        check the status of your submissions as you progress.
+                    </p>
+                </div>
+
+                <div class="process-grid">
+
+                    <article class="process-card">
+                        <span class="process-number">01</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </span>
+                        <h3>Finance</h3>
+                        <p>Financial clearance and required fee documentation.</p>
+                    </article>
+
+                    <article class="process-card">
+                        <span class="process-number">02</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-building"></i>
+                        </span>
+                        <h3>Department</h3>
+                        <p>Departmental clearance and required verification.</p>
+                    </article>
+
+                    <article class="process-card">
+                        <span class="process-number">03</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-landmark"></i>
+                        </span>
+                        <h3>Faculty</h3>
+                        <p>Faculty-level clearance and documentation.</p>
+                    </article>
+
+                    <article class="process-card">
+                        <span class="process-number">04</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
+                        <h3>Library</h3>
+                        <p>Library clearance and relevant requirements.</p>
+                    </article>
+
+                    <article class="process-card">
+                        <span class="process-number">05</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </span>
+                        <h3>Health</h3>
+                        <p>Health clearance and required documentation.</p>
+                    </article>
+
+                    <article class="process-card">
+                        <span class="process-number">06</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-people-group"></i>
+                        </span>
+                        <h3>Student Affairs</h3>
+                        <p>Student affairs clearance and verification.</p>
+                    </article>
+
+                    <article class="process-card final-stage">
+                        <span class="process-number">07</span>
+                        <span class="process-icon">
+                            <i class="fa-solid fa-certificate"></i>
+                        </span>
+                        <h3>Final Clearance</h3>
+                        <p>Final review and completion of the clearance process.</p>
+                    </article>
+
+                </div>
+
+                <div class="process-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p>
+                        Clearance progresses through the configured stages.
+                        Requirements and approval depend on the applicable
+                        university clearance procedures.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== BENEFITS ==================== -->
+        <section class="benefits-section" id="benefits">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">WHY UNICLEAR?</span>
+
+                    <h2>
+                        Everything organised in one place
+                    </h2>
+
+                    <p>
+                        Designed to make the clearance process easier
+                        to follow for students and authorized staff.
+                    </p>
+                </div>
+
+                <div class="benefits-grid">
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+
+                        <h3>Online Document Submission</h3>
+
+                        <p>
+                            Submit required clearance documents through
+                            the portal instead of relying solely on
+                            paper-based submissions.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <h3>Progress Tracking</h3>
+
+                        <p>
+                            Check your clearance stage and see whether
+                            submissions are awaiting review, approved
+                            or rejected.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </div>
+
+                        <h3>Document Status</h3>
+
+                        <p>
+                            Review the status of uploaded documents and
+                            identify submissions that need attention.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+
+                        <h3>Role-Based Access</h3>
+
+                        <p>
+                            Provide separate portal experiences for
+                            students and authorized clearance staff.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== CALL TO ACTION ==================== -->
+        <section class="cta-section">
+            <div class="container cta-content">
+
+                <div class="cta-text">
+                    <span class="section-label">YOUR NEXT STEP</span>
+
+                    <h2>
+                        Ready to begin your clearance journey?
+                    </h2>
+
+                    <p>
+                        Create your UniClear account or sign in to
+                        access the services available to you.
+                    </p>
+                </div>
+
+                <div class="cta-actions">
+                    <a href="register.html" class="btn btn-light btn-large">
+                        Create Account
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <a href="login.html" class="btn btn-cta-outline btn-large">
+                        Sign In
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="index.html" class="brand footer-brand-link">
+                        <span class="brand-logo">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </span>
+
+                        <span class="brand-text">
+                            <strong>UniClear</strong>
+                            <small>UNIVERSITY OF NIGERIA, NSUKKA</small>
+                        </span>
+                    </a>
+
+                    <p>
+                        An online platform designed to support the
+                        student clearance process at the University
+                        of Nigeria, Nsukka.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#about">About UniClear</a>
+                    <a href="#process">Clearance Process</a>
+                    <a href="#benefits">Benefits</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Portal Access</h3>
+                    <a href="login.html">Sign In</a>
+                    <a href="register.html">Create Account</a>
+                    <a href="forgot-password.html">Forgot Password?</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>University</h3>
+                    <p>University of Nigeria, Nsukka</p>
+                    <p>Enugu State, Nigeria</p>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; <span id="currentYear">2026</span>
+                    UniClear. All rights reserved.
+                </p>
+
+                <a href="#home" class="back-to-top">
+                    Back to top
+                    <i class="fa-solid fa-arrow-up"></i>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Landing page JavaScript -->
+    <script src="js/navigation.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Register as a student or staff member to access the University of Nigeria, Nsukka UniClear online clearance platform."
+    />
+
+    <meta name="theme-color" content="#102b50" />
+
+    <title>Registration | UniClear</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <!-- Existing UniClear stylesheets -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+
+  <body>
+    <main class="register-page">
+      <!-- ==========================================
+           LEFT PANEL: UNICLEAR BRANDING
+      =========================================== -->
+      <aside class="register-brand-panel">
+        <a href="index.html" class="auth-brand" aria-label="UniClear home">
+          <span class="brand-icon">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          </span>
+
+          <span class="brand-name">Uni<span>Clear</span></span>
+        </a>
+
+        <div class="register-brand-content">
+          <span class="eyebrow">
+            <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+            University of Nigeria, Nsukka
+          </span>
+
+          <h1>
+            Begin your journey
+            <span>with confidence.</span>
+          </h1>
+
+          <p>
+            Access the UniClear online clearance platform. Register as a student
+            to manage your clearance or as an authorized staff member to support
+            the university clearance process.
+          </p>
+
+          <div class="register-benefits">
+            <div class="register-benefit">
+              <div class="register-benefit-icon">
+                <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+              </div>
+
+              <div>
+                <h3>Secure accounts</h3>
+                <p>Register with the details required for your account type.</p>
+              </div>
+            </div>
+
+            <div class="register-benefit">
+              <div class="register-benefit-icon">
+                <i class="fa-solid fa-file-circle-check" aria-hidden="true"></i>
+              </div>
+
+              <div>
+                <h3>Organized clearance</h3>
+                <p>
+                  Support a structured clearance process across university
+                  offices.
+                </p>
+              </div>
+            </div>
+
+            <div class="register-benefit">
+              <div class="register-benefit-icon">
+                <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+              </div>
+
+              <div>
+                <h3>Role-based access</h3>
+                <p>
+                  Students and staff use the account type appropriate to their
+                  responsibilities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="register-brand-footer">
+          <p>
+            &copy; <span id="registerCurrentYear">2026</span>
+            UniClear Student Clearance System.
+          </p>
+          <p>University of Nigeria, Nsukka.</p>
+        </footer>
+      </aside>
+
+      <!-- ==========================================
+           RIGHT PANEL: REGISTRATION
+      =========================================== -->
+      <section class="register-form-panel">
+        <div class="register-form-container">
+          <div class="register-topbar">
+            <a href="index.html" class="back-home">
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              <span>Back to home</span>
+            </a>
+
+            <p class="signin-prompt">
+              Already registered?
+              <a href="login.html">Sign in</a>
+            </p>
+          </div>
+
+          <header class="register-heading">
+            <span class="step-label">UNICLEAR PORTAL</span>
+            <h2>Create your account</h2>
+
+            <p>
+              Select your account type, then complete the required details.
+              Fields marked with <span aria-hidden="true">*</span> are required.
+            </p>
+          </header>
+
+          <!-- ======================================
+               ACCOUNT TYPE SELECTOR
+          ======================================= -->
+          <section
+            class="register-section"
+            aria-labelledby="accountTypeHeading"
+          >
+            <div class="register-section-heading">
+              <div class="register-section-icon">
+                <i class="fa-solid fa-users" aria-hidden="true"></i>
+              </div>
+
+              <div>
+                <h3 id="accountTypeHeading">Choose account type</h3>
+                <p>Select whether you are registering as a student or staff.</p>
+              </div>
+            </div>
+
+            <div
+              class="register-grid"
+              role="group"
+              aria-label="Registration account type"
+            >
+              <div class="register-field">
+                <button
+                  type="button"
+                  id="studentAccountButton"
+                  class="register-submit-button"
+                  aria-pressed="true"
+                >
+                  <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
+                  Student
+                </button>
+              </div>
+
+              <div class="register-field">
+                <button
+                  type="button"
+                  id="staffAccountButton"
+                  class="register-submit-button"
+                  aria-pressed="false"
+                >
+                  <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
+                  Staff
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Shared registration feedback -->
+          <div
+            id="registerMessage"
+            class="register-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <!-- ======================================
+               STUDENT REGISTRATION FORM
+               Existing student fields preserved.
+          ======================================= -->
+          <form
+            id="registerForm"
+            class="register-form"
+            novalidate
+            data-account-type="student"
+          >
+            <div id="studentRegistrationFields">
+              <!-- PERSONAL INFORMATION -->
+              <section class="register-section">
+                <div class="register-section-heading">
+                  <div class="register-section-icon">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                  </div>
+
+                  <div>
+                    <h3>Personal information</h3>
+                    <p>Enter your name and contact details.</p>
+                  </div>
+                </div>
+
+                <div class="register-grid">
+                  <div class="register-field">
+                    <label for="surname">
+                      Surname <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="surname"
+                      name="surname"
+                      placeholder="Enter your surname"
+                      autocomplete="family-name"
+                      maxlength="100"
+                      required
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="first_name">
+                      First name <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="first_name"
+                      name="first_name"
+                      placeholder="Enter your first name"
+                      autocomplete="given-name"
+                      maxlength="100"
+                      required
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="other_names">
+                      Other names
+                      <span class="optional">(Optional)</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="other_names"
+                      name="other_names"
+                      placeholder="Enter other names"
+                      autocomplete="additional-name"
+                      maxlength="100"
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="gender">
+                      Gender <span class="required">*</span>
+                    </label>
+
+                    <select id="gender" name="gender" required>
+                      <option value="" selected disabled>Select gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+
+                  <div class="register-field full-width">
+                    <label for="email">
+                      Email address <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      autocomplete="email"
+                      maxlength="254"
+                      required
+                    />
+                  </div>
+
+                  <div class="register-field full-width">
+                    <label for="phone_number">
+                      Phone number <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="tel"
+                      id="phone_number"
+                      name="phone_number"
+                      placeholder="e.g. 08012345678"
+                      autocomplete="tel"
+                      maxlength="20"
+                      required
+                    />
+
+                    <small class="field-hint">
+                      Include your country code if necessary.
+                    </small>
+                  </div>
+                </div>
+              </section>
+
+              <!-- STUDENT ACADEMIC INFORMATION -->
+              <section class="register-section">
+                <div class="register-section-heading">
+                  <div class="register-section-icon">
+                    <i
+                      class="fa-solid fa-graduation-cap"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+
+                  <div>
+                    <h3>Academic information</h3>
+                    <p>Provide your official university details.</p>
+                  </div>
+                </div>
+
+                <div class="register-grid">
+                  <div class="register-field full-width">
+                    <label for="reg_no">
+                      Registration number <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="reg_no"
+                      name="reg_no"
+                      placeholder="Enter your university registration number"
+                      autocomplete="off"
+                      maxlength="100"
+                      required
+                    />
+
+                    <small class="field-hint">
+                      Enter the registration number assigned to you by the
+                      university.
+                    </small>
+                  </div>
+
+                  <div class="register-field">
+                    <label for="admission_year">
+                      Admission year <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="number"
+                      id="admission_year"
+                      name="admission_year"
+                      placeholder="e.g. 2022"
+                      min="1900"
+                      max="2099"
+                      step="1"
+                      inputmode="numeric"
+                      required
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="faculty">
+                      Faculty <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="faculty"
+                      name="faculty"
+                      placeholder="Enter your faculty"
+                      list="facultyOptions"
+                      maxlength="150"
+                      autocomplete="organization-title"
+                      required
+                    />
+
+                    <datalist id="facultyOptions">
+                      <option value="Physical Sciences"></option>
+                      <option value="Engineering"></option>
+                      <option value="Biological Sciences"></option>
+                      <option value="Health Sciences and Technology"></option>
+                      <option value="Social Sciences"></option>
+                      <option value="Arts"></option>
+                      <option value="Education"></option>
+                      <option value="Agriculture"></option>
+                      <option value="Law"></option>
+                      <option value="Business Administration"></option>
+                      <option value="Environmental Studies"></option>
+                    </datalist>
+
+                    <small class="field-hint">
+                      Enter the official name of your faculty.
+                    </small>
+                  </div>
+
+                  <div class="register-field full-width">
+                    <label for="department">
+                      Department <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="department"
+                      name="department"
+                      placeholder="Enter your department"
+                      list="departmentOptions"
+                      maxlength="150"
+                      required
+                    />
+
+                    <datalist id="departmentOptions">
+                      <option value="Computer Science"></option>
+                      <option value="Mathematics"></option>
+                      <option value="Statistics"></option>
+                      <option value="Physics and Astronomy"></option>
+                      <option value="Chemistry"></option>
+                      <option value="Biochemistry"></option>
+                    </datalist>
+
+                    <small class="field-hint">
+                      Enter the official name of your department. Suggestions
+                      are optional.
+                    </small>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- ======================================
+                 STAFF REGISTRATION FIELDS
+            ======================================= -->
+            <div id="staffRegistrationFields" hidden>
+              <div class="register-notice" role="note">
+                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+
+                <div>
+                  <strong>Staff account registration</strong>
+
+                  Staff registration is intended for authorized university
+                  personnel. Your selected role determines the clearance stage
+                  assigned by the backend. Staff onboarding must be protected by
+                  administrator authorization.
+                </div>
+              </div>
+
+              <!-- STAFF IDENTITY -->
+              <section class="register-section">
+                <div class="register-section-heading">
+                  <div class="register-section-icon">
+                    <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                  </div>
+
+                  <div>
+                    <h3>Staff information</h3>
+                    <p>
+                      Enter your official staff identity and contact details.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="register-grid">
+                  <div class="register-field full-width">
+                    <label for="staff_id">
+                      Staff ID <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="staff_id"
+                      name="staff_id"
+                      placeholder="Enter your official staff ID"
+                      autocomplete="off"
+                      maxlength="100"
+                      required
+                      disabled
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="staff_surname">
+                      Surname <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="staff_surname"
+                      name="surname"
+                      placeholder="Enter your surname"
+                      autocomplete="family-name"
+                      maxlength="100"
+                      required
+                      disabled
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="staff_first_name">
+                      First name <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="staff_first_name"
+                      name="first_name"
+                      placeholder="Enter your first name"
+                      autocomplete="given-name"
+                      maxlength="100"
+                      required
+                      disabled
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="staff_other_names">
+                      Other names <span class="optional">(Optional)</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="staff_other_names"
+                      name="other_names"
+                      placeholder="Enter other names"
+                      autocomplete="additional-name"
+                      maxlength="100"
+                      disabled
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="staff_email">
+                      Official email address <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="email"
+                      id="staff_email"
+                      name="email"
+                      placeholder="staff@example.com"
+                      autocomplete="email"
+                      maxlength="254"
+                      required
+                      disabled
+                    />
+                  </div>
+
+                  <div class="register-field">
+                    <label for="staff_department">
+                      Department <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="staff_department"
+                      name="department"
+                      placeholder="Enter your department"
+                      maxlength="150"
+                      required
+                      disabled
+                    />
+                  </div>
+
+                  <div class="register-field full-width">
+                    <label for="staff_faculty">
+                      Faculty <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="staff_faculty"
+                      name="faculty"
+                      placeholder="Enter your faculty or administrative unit"
+                      maxlength="150"
+                      required
+                      disabled
+                    />
+
+                    <small class="field-hint">
+                      If your role is based in a central office, enter the
+                      applicable administrative unit according to your
+                      institution's staff records.
+                    </small>
+                  </div>
+
+                  <div class="register-field full-width">
+                    <label for="staff_role">
+                      Staff role <span class="required">*</span>
+                    </label>
+
+                    <select id="staff_role" name="role" required disabled>
+                      <option value="" selected disabled>
+                        Select your authorized staff role
+                      </option>
+
+                      <option value="Finance Clearance Officer">
+                        Finance Clearance Officer
+                      </option>
+
+                      <option value="Department Clearance Officer">
+                        Department Clearance Officer
+                      </option>
+
+                      <option value="Faculty Clearance Officer">
+                        Faculty Clearance Officer
+                      </option>
+
+                      <option value="Library Clearance Officer">
+                        Library Clearance Officer
+                      </option>
+
+                      <option value="Health Clearance Officer">
+                        Health Clearance Officer
+                      </option>
+
+                      <option value="Student Affairs Clearance Officer">
+                        Student Affairs Clearance Officer
+                      </option>
+
+                      <option value="Final Clearance Officer">
+                        Final Clearance Officer
+                      </option>
+                    </select>
+
+                    <small class="field-hint">
+                      Choose only the role authorized for your staff account.
+                      The clearance stage is assigned by the backend.
+                    </small>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- ======================================
+                 ACCOUNT SECURITY
+            ======================================= -->
+            <section class="register-section">
+              <div class="register-section-heading">
+                <div class="register-section-icon">
+                  <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                </div>
+
+                <div>
+                  <h3>Account security</h3>
+                  <p>Create a password to protect your account.</p>
+                </div>
+              </div>
+
+              <div class="register-grid">
+                <div class="register-field">
+                  <label for="password">
+                    Password <span class="required">*</span>
+                  </label>
+
+                  <div class="register-password-wrap">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Create a password"
+                      autocomplete="new-password"
+                      minlength="8"
+                      maxlength="128"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      data-password-target="password"
+                      aria-label="Show password"
+                      title="Show password"
+                    >
+                      <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <small class="field-hint">Use at least 8 characters.</small>
+                </div>
+
+                <div class="register-field">
+                  <label for="confirm_password">
+                    Confirm password <span class="required">*</span>
+                  </label>
+
+                  <div class="register-password-wrap">
+                    <input
+                      type="password"
+                      id="confirm_password"
+                      name="confirm_password"
+                      placeholder="Enter password again"
+                      autocomplete="new-password"
+                      minlength="8"
+                      maxlength="128"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      data-password-target="confirm_password"
+                      aria-label="Show password"
+                      title="Show password"
+                    >
+                      <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- TERMS AND CONDITIONS -->
+            <div class="register-terms">
+              <input
+                type="checkbox"
+                id="agreeTerms"
+                name="agreeTerms"
+                required
+              />
+
+              <label for="agreeTerms">
+                I confirm that the information provided is accurate and agree to
+                use the UniClear platform in accordance with applicable
+                university rules.
+              </label>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button
+              type="submit"
+              id="registerSubmitButton"
+              class="register-submit-button"
+            >
+              <span class="button-spinner" aria-hidden="true"></span>
+
+              <span id="registerButtonText">Create Student Account</span>
+
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+
+            <p class="register-security-note">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+
+              Your registration details are submitted to the UniClear
+              registration service.
+            </p>
+          </form>
+
+          <p class="register-bottom-prompt">
+            Already have a UniClear account?
+            <a href="login.html">Sign in here</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Keep the existing JavaScript path -->
+    <script src="js/register.js"></script>
+  </body>
+</html>

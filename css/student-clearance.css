@@ -1,0 +1,1919 @@
+/* =========================================================
+   UNICLEAR STUDENT CLEARANCE PORTAL
+   File: css/student-clearance.css
+
+   DESIGN:
+   1. Professional university clearance interface
+   2. Navy sidebar with green and gold accents
+   3. Clearance overview and summary cards
+   4. Progress bar and clearance stage cards
+   5. Rejection and attention notices
+   6. Responsive desktop, tablet, and mobile layouts
+========================================================= */
+
+
+/* =========================================================
+   1. ROOT VARIABLES AND RESET
+========================================================= */
+
+:root {
+    --clearance-navy: #10233f;
+    --clearance-navy-light: #19385f;
+    --clearance-green: #168653;
+    --clearance-green-dark: #106b41;
+    --clearance-green-light: #e9f7ef;
+    --clearance-gold: #e8ad38;
+    --clearance-gold-light: #fff6df;
+
+    --clearance-white: #ffffff;
+    --clearance-background: #f4f7fb;
+    --clearance-border: #e2e8f0;
+    --clearance-text: #263449;
+    --clearance-muted: #748197;
+
+    --clearance-blue: #3273c5;
+    --clearance-blue-light: #eaf2ff;
+
+    --clearance-red: #c43c43;
+    --clearance-red-light: #fff0f0;
+
+    --clearance-orange: #b96a13;
+    --clearance-orange-light: #fff4e5;
+
+    --clearance-shadow:
+        0 5px 22px rgba(16, 35, 63, 0.055);
+
+    --clearance-radius: 14px;
+    --clearance-transition: 0.25s ease;
+}
+
+.student-clearance-page,
+.student-clearance-page * {
+    box-sizing: border-box;
+}
+
+.student-clearance-page {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--clearance-background);
+    color: var(--clearance-text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.student-clearance-page button,
+.student-clearance-page input,
+.student-clearance-page select,
+.student-clearance-page textarea {
+    font: inherit;
+}
+
+.student-clearance-page button {
+    cursor: pointer;
+}
+
+.student-clearance-page button:focus-visible,
+.student-clearance-page a:focus-visible {
+    outline: 3px solid rgba(22, 134, 83, 0.35);
+    outline-offset: 3px;
+}
+
+.student-clearance-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.student-clearance-page h1,
+.student-clearance-page h2,
+.student-clearance-page h3,
+.student-clearance-page p {
+    margin-top: 0;
+}
+
+.student-clearance-page [hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   2. SIDEBAR
+========================================================= */
+
+.student-clearance-page .dashboard-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 265px;
+    height: 100vh;
+    overflow-y: auto;
+
+    background: var(--clearance-navy);
+    color: var(--clearance-white);
+
+    box-shadow: 5px 0 22px rgba(16, 35, 63, 0.08);
+
+    transition: transform var(--clearance-transition);
+}
+
+.student-clearance-page .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-height: 88px;
+    padding: 20px 22px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.student-clearance-page .brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    background: var(--clearance-green);
+    color: var(--clearance-white);
+
+    font-size: 20px;
+}
+
+.student-clearance-page .brand-text h2 {
+    margin: 0;
+    color: var(--clearance-white);
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: -0.7px;
+}
+
+.student-clearance-page .brand-text span {
+    display: block;
+    margin-top: 1px;
+
+    color: #b9c9dc;
+    font-size: 11px;
+}
+
+.student-clearance-page .sidebar-close-button {
+    display: none;
+
+    margin-left: auto;
+    padding: 7px;
+
+    border: 0;
+    background: transparent;
+    color: white;
+
+    font-size: 18px;
+}
+
+.student-clearance-page .sidebar-student-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 20px 15px;
+    padding: 15px 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.student-clearance-page .sidebar-avatar,
+.student-clearance-page .topbar-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    border-radius: 50%;
+
+    background: #d8efe3;
+    color: var(--clearance-green-dark);
+
+    font-weight: 750;
+    text-transform: uppercase;
+}
+
+.student-clearance-page .sidebar-avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+}
+
+.student-clearance-page .sidebar-student-info {
+    min-width: 0;
+}
+
+.student-clearance-page .sidebar-student-info h3 {
+    margin: 0 0 3px;
+
+    overflow: hidden;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.student-clearance-page .sidebar-student-info p {
+    margin: 0;
+
+    overflow: hidden;
+    color: #b8c8dc;
+
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.student-clearance-page .sidebar-navigation {
+    flex: 1;
+    padding: 0 14px 20px;
+}
+
+.student-clearance-page .sidebar-section-title {
+    margin: 20px 9px 10px;
+
+    color: #94a8c1;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+}
+
+.student-clearance-page .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    width: 100%;
+    min-height: 46px;
+    margin-bottom: 5px;
+    padding: 11px 13px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: transparent;
+    color: #d1dbea;
+
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+
+    transition:
+        background var(--clearance-transition),
+        color var(--clearance-transition);
+}
+
+.student-clearance-page .sidebar-link > i {
+    width: 19px;
+    flex-shrink: 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.student-clearance-page .sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.075);
+    color: white;
+}
+
+.student-clearance-page .sidebar-link.active {
+    background: var(--clearance-green);
+    color: white;
+    font-weight: 650;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.student-clearance-page .sidebar-logout {
+    margin-top: 4px;
+}
+
+.student-clearance-page .sidebar-logout:hover {
+    background: rgba(196, 60, 67, 0.17);
+    color: #ffb8bd;
+}
+
+.student-clearance-page .sidebar-footer {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    margin: 10px 15px 18px;
+    padding: 14px 12px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.student-clearance-page .sidebar-footer-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 33px;
+    height: 33px;
+    flex-shrink: 0;
+
+    border-radius: 9px;
+    background: rgba(22, 134, 83, 0.22);
+    color: #83dfad;
+}
+
+.student-clearance-page .sidebar-footer strong {
+    display: block;
+    color: #f3f7fc;
+    font-size: 11px;
+}
+
+.student-clearance-page .sidebar-footer p {
+    margin: 3px 0 0;
+
+    color: #aabbd0;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   3. MAIN WORKSPACE AND TOP BAR
+========================================================= */
+
+.student-clearance-page .dashboard-main {
+    min-height: 100vh;
+    margin-left: 265px;
+}
+
+.student-clearance-page .dashboard-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+
+    min-height: 112px;
+    padding: 22px 34px;
+
+    border-bottom: 1px solid var(--clearance-border);
+    background: var(--clearance-white);
+}
+
+.student-clearance-page .topbar-left,
+.student-clearance-page .topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.student-clearance-page .topbar-left {
+    min-width: 0;
+    gap: 15px;
+}
+
+.student-clearance-page .page-heading {
+    min-width: 0;
+}
+
+.student-clearance-page .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-bottom: 5px;
+
+    color: var(--clearance-muted);
+    font-size: 11px;
+}
+
+.student-clearance-page .breadcrumb i {
+    color: #a9b4c3;
+    font-size: 9px;
+}
+
+.student-clearance-page .breadcrumb span:last-child {
+    color: var(--clearance-green);
+    font-weight: 650;
+}
+
+.student-clearance-page .page-heading h1 {
+    margin: 0 0 3px;
+
+    color: var(--clearance-navy);
+    font-size: 26px;
+    font-weight: 750;
+    letter-spacing: -0.65px;
+    line-height: 1.35;
+}
+
+.student-clearance-page .page-heading p {
+    margin: 0;
+
+    color: var(--clearance-muted);
+    font-size: 12px;
+}
+
+.student-clearance-page .topbar-right {
+    justify-content: flex-end;
+    gap: 23px;
+}
+
+.student-clearance-page .topbar-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--clearance-muted);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.student-clearance-page .topbar-date i {
+    color: var(--clearance-green);
+    font-size: 15px;
+}
+
+.student-clearance-page .topbar-profile-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0;
+
+    border: 0;
+    background: transparent;
+    text-align: left;
+}
+
+.student-clearance-page .topbar-avatar {
+    width: 39px;
+    height: 39px;
+    font-size: 14px;
+}
+
+.student-clearance-page .topbar-profile-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.student-clearance-page .topbar-profile-info strong {
+    max-width: 145px;
+
+    overflow: hidden;
+    color: var(--clearance-navy);
+
+    font-size: 12px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.student-clearance-page .topbar-profile-info small {
+    color: var(--clearance-muted);
+    font-size: 10px;
+}
+
+.student-clearance-page .topbar-profile-button > i {
+    color: var(--clearance-muted);
+    font-size: 10px;
+}
+
+.student-clearance-page .mobile-menu-button {
+    display: none;
+
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+
+    border: 1px solid var(--clearance-border);
+    border-radius: 9px;
+
+    background: white;
+    color: var(--clearance-navy);
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   4. CONTENT LAYOUT
+========================================================= */
+
+.student-clearance-page .clearance-content {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 29px 34px 20px;
+}
+
+.student-clearance-page .clearance-content > section {
+    margin-bottom: 24px;
+}
+
+.student-clearance-page .clearance-message {
+    margin-bottom: 20px;
+    padding: 13px 16px;
+
+    border: 1px solid var(--clearance-border);
+    border-radius: 10px;
+
+    background: white;
+    color: var(--clearance-text);
+
+    font-size: 12px;
+}
+
+.student-clearance-page .clearance-message.success {
+    border-color: #b8e6c9;
+    background: var(--clearance-green-light);
+    color: var(--clearance-green-dark);
+}
+
+.student-clearance-page .clearance-message.error {
+    border-color: #f3c4c7;
+    background: var(--clearance-red-light);
+    color: var(--clearance-red);
+}
+
+.student-clearance-page .clearance-message.warning {
+    border-color: #f0d69d;
+    background: var(--clearance-gold-light);
+    color: #87520b;
+}
+
+
+/* =========================================================
+   5. WELCOME CARD
+========================================================= */
+
+.student-clearance-page .clearance-welcome-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    min-height: 235px;
+    overflow: hidden;
+    padding: 30px 35px;
+
+    border-radius: var(--clearance-radius);
+
+    background:
+        radial-gradient(
+            circle at 90% 12%,
+            rgba(51, 128, 105, 0.36),
+            transparent 33%
+        ),
+        linear-gradient(
+            115deg,
+            var(--clearance-navy) 0%,
+            #153e52 100%
+        );
+
+    color: white;
+    box-shadow: var(--clearance-shadow);
+}
+
+.student-clearance-page .welcome-card-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.student-clearance-page .welcome-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    color: #a9e8c5;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+}
+
+.student-clearance-page .welcome-card-content h2 {
+    max-width: 560px;
+    margin: 0 0 10px;
+
+    color: white;
+    font-size: clamp(24px, 2.2vw, 32px);
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    line-height: 1.25;
+}
+
+.student-clearance-page .welcome-card-content > p {
+    max-width: 550px;
+    margin: 0 0 21px;
+
+    color: #d2dfeb;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.student-clearance-page .overall-status-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.student-clearance-page .status-label {
+    color: #d2dfeb;
+    font-size: 11px;
+}
+
+.student-clearance-page .status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 6px 11px;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.student-clearance-page .status-in-progress {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+
+.student-clearance-page .welcome-card-illustration {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 205px;
+    height: 175px;
+    flex-shrink: 0;
+}
+
+.student-clearance-page .illustration-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 125px;
+    height: 125px;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.09);
+    color: #d7f5e4;
+
+    font-size: 53px;
+
+    box-shadow:
+        0 0 0 15px rgba(255, 255, 255, 0.035),
+        0 0 0 30px rgba(255, 255, 255, 0.02);
+}
+
+.student-clearance-page .illustration-check {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+    height: 35px;
+
+    border: 3px solid #1a4252;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: var(--clearance-green);
+
+    font-size: 13px;
+}
+
+.student-clearance-page .illustration-check-one {
+    top: 12px;
+    right: 28px;
+}
+
+.student-clearance-page .illustration-check-two {
+    bottom: 10px;
+    left: 15px;
+
+    background: var(--clearance-gold);
+    color: var(--clearance-navy);
+}
+
+.student-clearance-page .illustration-check-three {
+    right: 9px;
+    bottom: 25px;
+}
+
+
+/* =========================================================
+   6. SUMMARY CARDS
+========================================================= */
+
+.student-clearance-page .clearance-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.student-clearance-page .summary-card {
+    min-width: 0;
+    padding: 21px;
+
+    border: 1px solid var(--clearance-border);
+    border-radius: var(--clearance-radius);
+
+    background: var(--clearance-white);
+    box-shadow: var(--clearance-shadow);
+
+    transition:
+        transform var(--clearance-transition),
+        box-shadow var(--clearance-transition);
+}
+
+.student-clearance-page .summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 26px rgba(16, 35, 63, 0.09);
+}
+
+.student-clearance-page .summary-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-bottom: 17px;
+}
+
+.student-clearance-page .summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    font-size: 17px;
+}
+
+.student-clearance-page .summary-icon-blue {
+    background: var(--clearance-blue-light);
+    color: var(--clearance-blue);
+}
+
+.student-clearance-page .summary-icon-green {
+    background: var(--clearance-green-light);
+    color: var(--clearance-green);
+}
+
+.student-clearance-page .summary-icon-gold {
+    background: var(--clearance-gold-light);
+    color: #b67c12;
+}
+
+.student-clearance-page .summary-icon-red {
+    background: var(--clearance-red-light);
+    color: var(--clearance-red);
+}
+
+.student-clearance-page .summary-card-label {
+    color: var(--clearance-muted);
+    font-size: 11px;
+    text-align: right;
+}
+
+.student-clearance-page .summary-card-value {
+    margin-bottom: 3px;
+
+    color: var(--clearance-navy);
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+}
+
+.student-clearance-page .summary-card-description {
+    margin: 8px 0 0;
+
+    color: var(--clearance-muted);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   7. GENERAL PANELS
+========================================================= */
+
+.student-clearance-page .clearance-panel {
+    padding: 25px;
+
+    border: 1px solid var(--clearance-border);
+    border-radius: var(--clearance-radius);
+
+    background: var(--clearance-white);
+    box-shadow: var(--clearance-shadow);
+}
+
+.student-clearance-page .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+.student-clearance-page .panel-heading h2 {
+    margin: 0 0 5px;
+
+    color: var(--clearance-navy);
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+}
+
+.student-clearance-page .panel-heading p {
+    margin: 0;
+
+    color: var(--clearance-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   8. BUTTONS
+========================================================= */
+
+.student-clearance-page .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 39px;
+    padding: 9px 14px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    transition:
+        background var(--clearance-transition),
+        border-color var(--clearance-transition),
+        color var(--clearance-transition);
+}
+
+.student-clearance-page .btn-primary {
+    border-color: var(--clearance-green);
+    background: var(--clearance-green);
+    color: white;
+}
+
+.student-clearance-page .btn-primary:hover {
+    border-color: var(--clearance-green-dark);
+    background: var(--clearance-green-dark);
+}
+
+.student-clearance-page .btn-outline {
+    border-color: var(--clearance-border);
+    background: white;
+    color: var(--clearance-text);
+}
+
+.student-clearance-page .btn-outline:hover {
+    border-color: var(--clearance-green);
+    background: var(--clearance-green-light);
+    color: var(--clearance-green-dark);
+}
+
+.student-clearance-page .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+
+/* =========================================================
+   9. PROGRESS OVERVIEW
+========================================================= */
+
+.student-clearance-page .progress-overview {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    padding: 22px;
+
+    border: 1px solid #e4efe9;
+    border-radius: 12px;
+
+    background: #f8fcf9;
+}
+
+.student-clearance-page .progress-percentage-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    min-width: 145px;
+    padding-right: 25px;
+
+    border-right: 1px solid #dcebe1;
+}
+
+.student-clearance-page .progress-percentage-block strong {
+    color: var(--clearance-green);
+    font-size: 37px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+.student-clearance-page .progress-percentage-block span {
+    margin-top: 5px;
+
+    color: var(--clearance-muted);
+    font-size: 10px;
+}
+
+.student-clearance-page .progress-bar-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.student-clearance-page .progress-bar-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-bottom: 11px;
+
+    color: var(--clearance-text);
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.student-clearance-page #progressStageCount {
+    color: var(--clearance-green);
+    white-space: nowrap;
+}
+
+.student-clearance-page .progress-track {
+    width: 100%;
+    height: 11px;
+    overflow: hidden;
+
+    border-radius: 20px;
+    background: #e3ebe6;
+}
+
+.student-clearance-page .progress-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+    background: linear-gradient(
+        90deg,
+        var(--clearance-green),
+        #45b77e
+    );
+
+    transition: width 0.5s ease;
+}
+
+.student-clearance-page .progress-help-text {
+    margin: 10px 0 0;
+
+    color: var(--clearance-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   10. CLEARANCE STAGE LIST
+========================================================= */
+
+.student-clearance-page .stage-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px 12px;
+
+    border: 1px solid #d9e8df;
+    border-radius: 20px;
+
+    background: var(--clearance-green-light);
+    color: var(--clearance-green-dark);
+
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.student-clearance-page .clearance-stages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.student-clearance-page .clearance-stage-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+
+    padding: 19px;
+
+    border: 1px solid var(--clearance-border);
+    border-radius: 12px;
+
+    background: white;
+
+    transition:
+        border-color var(--clearance-transition),
+        background var(--clearance-transition);
+}
+
+.student-clearance-page .clearance-stage-card:hover {
+    border-color: #b8d9c5;
+    background: #fcfefc;
+}
+
+.student-clearance-page .stage-number,
+.student-clearance-page .stage-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: var(--clearance-blue-light);
+    color: var(--clearance-blue);
+
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.student-clearance-page .stage-number.approved,
+.student-clearance-page .stage-icon.approved {
+    background: var(--clearance-green-light);
+    color: var(--clearance-green);
+}
+
+.student-clearance-page .stage-number.rejected,
+.student-clearance-page .stage-icon.rejected {
+    background: var(--clearance-red-light);
+    color: var(--clearance-red);
+}
+
+.student-clearance-page .stage-number.under-review,
+.student-clearance-page .stage-icon.under-review {
+    background: var(--clearance-gold-light);
+    color: var(--clearance-orange);
+}
+
+.student-clearance-page .stage-number.pending,
+.student-clearance-page .stage-icon.pending {
+    background: #edf1f6;
+    color: #61718a;
+}
+
+.student-clearance-page .stage-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.student-clearance-page .stage-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 7px;
+}
+
+.student-clearance-page .stage-heading h3 {
+    margin: 0;
+
+    color: var(--clearance-navy);
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.student-clearance-page .stage-description {
+    margin: 0;
+
+    color: var(--clearance-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.student-clearance-page .stage-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 5px 9px;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.student-clearance-page .stage-status.approved {
+    border-color: #ccebd8;
+    background: var(--clearance-green-light);
+    color: var(--clearance-green-dark);
+}
+
+.student-clearance-page .stage-status.rejected {
+    border-color: #f3cdcf;
+    background: var(--clearance-red-light);
+    color: var(--clearance-red);
+}
+
+.student-clearance-page .stage-status.under-review {
+    border-color: #f0dcaf;
+    background: var(--clearance-gold-light);
+    color: #98600f;
+}
+
+.student-clearance-page .stage-status.pending,
+.student-clearance-page .stage-status.awaiting-submission {
+    border-color: #e1e7ef;
+    background: #f2f5f9;
+    color: #64748b;
+}
+
+.student-clearance-page .stage-status.in-progress {
+    border-color: #cdddf7;
+    background: var(--clearance-blue-light);
+    color: #285fa8;
+}
+
+.student-clearance-page .stage-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+
+    margin-top: 11px;
+
+    color: var(--clearance-muted);
+    font-size: 10px;
+}
+
+.student-clearance-page .stage-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.student-clearance-page .stage-meta i {
+    font-size: 11px;
+}
+
+.student-clearance-page .stage-rejection-reason {
+    margin-top: 13px;
+    padding: 12px 13px;
+
+    border-left: 3px solid var(--clearance-red);
+    border-radius: 0 8px 8px 0;
+
+    background: var(--clearance-red-light);
+    color: #8f3037;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.student-clearance-page .stage-rejection-reason strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.student-clearance-page .stage-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.student-clearance-page .stage-action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 32px;
+    padding: 7px 10px;
+
+    border: 1px solid #dce8e0;
+    border-radius: 7px;
+
+    background: white;
+    color: var(--clearance-green-dark);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition: background var(--clearance-transition);
+}
+
+.student-clearance-page .stage-action-link:hover {
+    background: var(--clearance-green-light);
+}
+
+.student-clearance-page .stage-action-link:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+
+/* =========================================================
+   11. LOADING AND EMPTY STATES
+========================================================= */
+
+.student-clearance-page .clearance-loading-state,
+.student-clearance-page .clearance-empty-state {
+    padding: 45px 20px;
+    text-align: center;
+}
+
+.student-clearance-page .loading-spinner {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 14px;
+
+    border: 4px solid #e4eee8;
+    border-top-color: var(--clearance-green);
+    border-radius: 50%;
+
+    animation: clearance-spin 0.8s linear infinite;
+}
+
+@keyframes clearance-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.student-clearance-page .clearance-loading-state p {
+    margin: 0;
+    color: var(--clearance-muted);
+    font-size: 12px;
+}
+
+.student-clearance-page .empty-state-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 17px;
+
+    border-radius: 50%;
+    background: var(--clearance-green-light);
+    color: var(--clearance-green);
+
+    font-size: 25px;
+}
+
+.student-clearance-page .clearance-empty-state h3 {
+    margin: 0 0 8px;
+
+    color: var(--clearance-navy);
+    font-size: 16px;
+}
+
+.student-clearance-page .clearance-empty-state p {
+    max-width: 420px;
+    margin: 0 auto 18px;
+
+    color: var(--clearance-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   12. ATTENTION REQUIRED / REJECTION PANEL
+========================================================= */
+
+.student-clearance-page .attention-panel {
+    border-color: #f0d1d2;
+}
+
+.student-clearance-page .attention-panel .panel-heading h2 {
+    color: var(--clearance-red);
+}
+
+.student-clearance-page .attention-panel .panel-heading h2 i {
+    margin-right: 6px;
+}
+
+.student-clearance-page .attention-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.student-clearance-page .attention-item {
+    padding: 15px;
+
+    border: 1px solid #f0d1d2;
+    border-radius: 10px;
+
+    background: #fffafa;
+}
+
+.student-clearance-page .attention-item h3 {
+    margin: 0 0 6px;
+
+    color: #96333a;
+    font-size: 13px;
+}
+
+.student-clearance-page .attention-item p {
+    margin: 0;
+
+    color: #76565a;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.student-clearance-page .attention-item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 11px;
+
+    color: var(--clearance-green-dark);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   13. INFORMATION CARDS
+========================================================= */
+
+.student-clearance-page .clearance-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.student-clearance-page .information-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    min-width: 0;
+    padding: 21px;
+
+    border: 1px solid var(--clearance-border);
+    border-radius: var(--clearance-radius);
+
+    background: white;
+    box-shadow: var(--clearance-shadow);
+}
+
+.student-clearance-page .information-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: var(--clearance-blue-light);
+    color: var(--clearance-blue);
+
+    font-size: 17px;
+}
+
+.student-clearance-page .information-icon-gold {
+    background: var(--clearance-gold-light);
+    color: #b67c12;
+}
+
+.student-clearance-page .information-card h3 {
+    margin: 1px 0 7px;
+
+    color: var(--clearance-navy);
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.student-clearance-page .information-card p {
+    margin: 0;
+
+    color: var(--clearance-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.student-clearance-page .information-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 11px;
+
+    color: var(--clearance-green);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.student-clearance-page .information-link:hover {
+    color: var(--clearance-green-dark);
+}
+
+
+/* =========================================================
+   14. FOOTER
+========================================================= */
+
+.student-clearance-page .dashboard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 19px 2px 5px;
+
+    border-top: 1px solid var(--clearance-border);
+
+    color: var(--clearance-muted);
+    font-size: 10px;
+}
+
+.student-clearance-page .dashboard-footer p {
+    margin: 0;
+}
+
+.student-clearance-page .dashboard-footer > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.student-clearance-page .dashboard-footer > span i {
+    color: var(--clearance-green);
+}
+
+
+/* =========================================================
+   15. SIDEBAR OVERLAY
+========================================================= */
+
+.student-clearance-page .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    background: rgba(8, 20, 37, 0.55);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity var(--clearance-transition),
+        visibility var(--clearance-transition);
+}
+
+
+/* =========================================================
+   16. TABLET RESPONSIVENESS
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .student-clearance-page .dashboard-sidebar {
+        width: 245px;
+    }
+
+    .student-clearance-page .dashboard-main {
+        margin-left: 245px;
+    }
+
+    .student-clearance-page .dashboard-topbar {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+
+    .student-clearance-page .clearance-content {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+
+    .student-clearance-page .clearance-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .student-clearance-page .topbar-right {
+        gap: 15px;
+    }
+
+    .student-clearance-page .topbar-date {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   17. SMALL LAPTOPS AND TABLETS
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .student-clearance-page .dashboard-sidebar {
+        width: 265px;
+        transform: translateX(-100%);
+    }
+
+    .student-clearance-page .dashboard-sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .student-clearance-page .dashboard-sidebar.sidebar-open
+    ~ .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .student-clearance-page .dashboard-main {
+        margin-left: 0;
+    }
+
+    .student-clearance-page .mobile-menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .student-clearance-page .sidebar-close-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .student-clearance-page .dashboard-topbar {
+        min-height: 100px;
+        padding: 19px 24px;
+    }
+
+    .student-clearance-page .clearance-content {
+        padding: 24px;
+    }
+
+    .student-clearance-page .welcome-card-illustration {
+        width: 160px;
+        transform: scale(0.9);
+    }
+}
+
+
+/* =========================================================
+   18. MOBILE DEVICES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .student-clearance-page .dashboard-topbar {
+        align-items: flex-start;
+        gap: 12px;
+
+        min-height: auto;
+        padding: 17px 15px;
+    }
+
+    .student-clearance-page .topbar-left {
+        flex: 1;
+        gap: 10px;
+    }
+
+    .student-clearance-page .mobile-menu-button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .student-clearance-page .page-heading h1 {
+        font-size: 21px;
+    }
+
+    .student-clearance-page .page-heading p {
+        max-width: 260px;
+        font-size: 10px;
+    }
+
+    .student-clearance-page .breadcrumb {
+        gap: 6px;
+        font-size: 10px;
+    }
+
+    .student-clearance-page .topbar-right {
+        gap: 0;
+    }
+
+    .student-clearance-page .topbar-profile-button {
+        gap: 0;
+    }
+
+    .student-clearance-page .topbar-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .student-clearance-page .topbar-profile-info,
+    .student-clearance-page .topbar-profile-button > i {
+        display: none;
+    }
+
+    .student-clearance-page .clearance-content {
+        padding: 16px 13px;
+    }
+
+    .student-clearance-page .clearance-content > section {
+        margin-bottom: 16px;
+    }
+
+    .student-clearance-page .clearance-welcome-card {
+        min-height: auto;
+        padding: 23px 20px;
+    }
+
+    .student-clearance-page .welcome-card-content {
+        max-width: 100%;
+    }
+
+    .student-clearance-page .welcome-eyebrow {
+        font-size: 9px;
+    }
+
+    .student-clearance-page .welcome-card-content h2 {
+        font-size: 24px;
+    }
+
+    .student-clearance-page .welcome-card-content > p {
+        font-size: 11px;
+    }
+
+    .student-clearance-page .welcome-card-illustration {
+        display: none;
+    }
+
+    .student-clearance-page .clearance-summary-grid {
+        gap: 11px;
+    }
+
+    .student-clearance-page .summary-card {
+        padding: 15px 13px;
+    }
+
+    .student-clearance-page .summary-card-top {
+        align-items: flex-start;
+        gap: 7px;
+        margin-bottom: 12px;
+    }
+
+    .student-clearance-page .summary-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .student-clearance-page .summary-card-label {
+        font-size: 9px;
+    }
+
+    .student-clearance-page .summary-card-value {
+        font-size: 26px;
+    }
+
+    .student-clearance-page .summary-card-description {
+        font-size: 9px;
+    }
+
+    .student-clearance-page .clearance-panel {
+        padding: 18px 14px;
+    }
+
+    .student-clearance-page .panel-heading {
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 19px;
+    }
+
+    .student-clearance-page .panel-heading h2 {
+        font-size: 16px;
+    }
+
+    .student-clearance-page .panel-heading p {
+        font-size: 10px;
+    }
+
+    .student-clearance-page .progress-overview {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 17px;
+        padding: 17px 14px;
+    }
+
+    .student-clearance-page .progress-percentage-block {
+        min-width: 0;
+        width: 100%;
+        padding: 0 0 14px;
+        border-right: 0;
+        border-bottom: 1px solid #dcebe1;
+    }
+
+    .student-clearance-page .progress-percentage-block strong {
+        font-size: 32px;
+    }
+
+    .student-clearance-page .progress-bar-container {
+        width: 100%;
+    }
+
+    .student-clearance-page .progress-bar-heading {
+        align-items: flex-start;
+        font-size: 10px;
+    }
+
+    .student-clearance-page .stage-count-badge {
+        padding: 6px 8px;
+        font-size: 9px;
+    }
+
+    .student-clearance-page .clearance-stage-card {
+        gap: 11px;
+        padding: 14px 11px;
+    }
+
+    .student-clearance-page .stage-number,
+    .student-clearance-page .stage-icon {
+        width: 37px;
+        height: 37px;
+        border-radius: 9px;
+        font-size: 13px;
+    }
+
+    .student-clearance-page .stage-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .student-clearance-page .stage-heading h3 {
+        font-size: 12px;
+    }
+
+    .student-clearance-page .stage-description {
+        font-size: 10px;
+    }
+
+    .student-clearance-page .stage-status {
+        font-size: 9px;
+    }
+
+    .student-clearance-page .stage-meta {
+        gap: 8px;
+        font-size: 9px;
+    }
+
+    .student-clearance-page .stage-actions {
+        gap: 7px;
+    }
+
+    .student-clearance-page .stage-action-link {
+        font-size: 9px;
+    }
+
+    .student-clearance-page .clearance-information-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .student-clearance-page .information-card {
+        padding: 17px 14px;
+    }
+
+    .student-clearance-page .dashboard-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 16px;
+    }
+}
+
+
+/* =========================================================
+   19. EXTRA SMALL DEVICES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .student-clearance-page .dashboard-topbar {
+        padding-right: 11px;
+        padding-left: 11px;
+    }
+
+    .student-clearance-page .page-heading h1 {
+        font-size: 19px;
+    }
+
+    .student-clearance-page .clearance-content {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .student-clearance-page .summary-card {
+        padding: 12px 10px;
+    }
+
+    .student-clearance-page .summary-icon {
+        width: 31px;
+        height: 31px;
+    }
+
+    .student-clearance-page .summary-card-value {
+        font-size: 23px;
+    }
+
+    .student-clearance-page .clearance-panel {
+        padding: 15px 11px;
+    }
+
+    .student-clearance-page .clearance-stage-card {
+        gap: 9px;
+        padding: 12px 9px;
+    }
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .student-clearance-page *,
+    .student-clearance-page *::before,
+    .student-clearance-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}

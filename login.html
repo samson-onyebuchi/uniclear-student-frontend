@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Sign in to UniClear, the University of Nigeria, Nsukka student and staff clearance portal."
+    />
+
+    <meta name="theme-color" content="#102b50" />
+
+    <title>Sign In | UniClear - University of Nigeria, Nsukka</title>
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- Shared Website Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Authentication Page Styles -->
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+
+  <body class="auth-page">
+    <!-- Accessibility: Skip directly to the login form -->
+    <a href="#loginForm" class="skip-link"> Skip to sign in </a>
+
+    <main class="auth-layout">
+      <!-- =====================================================
+             LEFT BRANDING PANEL
+        ====================================================== -->
+      <aside class="auth-brand-panel">
+        <a href="index.html" class="auth-brand">
+          <span class="auth-brand-icon">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          </span>
+
+          <span class="auth-brand-text">
+            <strong>UniClear</strong>
+            <small>UNIVERSITY OF NIGERIA, NSUKKA</small>
+          </span>
+        </a>
+
+        <div class="auth-brand-content">
+          <span class="auth-eyebrow">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            SECURE CLEARANCE PORTAL
+          </span>
+
+          <h1>Your clearance journey starts here.</h1>
+
+          <p>
+            Access your UniClear account to manage clearance activities, submit
+            required documents, and follow your clearance progress through the
+            University.
+          </p>
+
+          <div class="auth-feature-list">
+            <div class="auth-feature">
+              <span class="auth-feature-icon">
+                <i class="fa-solid fa-file-circle-check" aria-hidden="true"></i>
+              </span>
+
+              <div>
+                <strong>Clearance Management</strong>
+                <p>
+                  Manage clearance activities and keep track of required
+                  documents.
+                </p>
+              </div>
+            </div>
+
+            <div class="auth-feature">
+              <span class="auth-feature-icon">
+                <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+              </span>
+
+              <div>
+                <strong>Progress Tracking</strong>
+                <p>
+                  Follow your clearance progress through the relevant university
+                  stages.
+                </p>
+              </div>
+            </div>
+
+            <div class="auth-feature">
+              <span class="auth-feature-icon">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              </span>
+
+              <div>
+                <strong>Account Access</strong>
+                <p>
+                  Access the portal using your registered student or authorized
+                  staff account.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="auth-brand-footer">
+          <span>UNIVERSITY OF NIGERIA, NSUKKA</span>
+          <span>UNICLEAR PORTAL</span>
+        </footer>
+      </aside>
+
+      <!-- =====================================================
+             RIGHT LOGIN PANEL
+        ====================================================== -->
+      <section class="auth-form-panel">
+        <div class="auth-form-container">
+          <!-- Mobile Branding -->
+          <div class="auth-mobile-brand">
+            <a href="index.html" class="auth-brand">
+              <span class="auth-brand-icon">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              </span>
+
+              <span class="auth-brand-text">
+                <strong>UniClear</strong>
+                <small>UNIVERSITY OF NIGERIA, NSUKKA</small>
+              </span>
+            </a>
+          </div>
+
+          <!-- Login Heading -->
+          <div class="auth-heading">
+            <span class="auth-heading-icon">
+              <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+            </span>
+
+            <h2>Welcome back</h2>
+
+            <p>Sign in to continue to your UniClear account.</p>
+          </div>
+
+          <!-- =================================================
+                     STUDENT / STAFF SELECTOR
+                ================================================== -->
+          <div
+            class="account-type-selector"
+            role="group"
+            aria-label="Select account type"
+          >
+            <button
+              type="button"
+              class="account-type-button active"
+              id="studentLoginTab"
+              data-role="student"
+              aria-pressed="true"
+            >
+              <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
+
+              <span>Student</span>
+            </button>
+
+            <button
+              type="button"
+              class="account-type-button"
+              id="staffLoginTab"
+              data-role="staff"
+              aria-pressed="false"
+            >
+              <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
+
+              <span>Staff</span>
+            </button>
+          </div>
+
+          <!-- =================================================
+                     LOGIN FEEDBACK MESSAGES
+                ================================================== -->
+          <div
+            id="loginMessage"
+            class="auth-message"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <!-- =================================================
+                     LOGIN FORM
+                ================================================== -->
+          <form id="loginForm" novalidate>
+            <!-- Selected account type -->
+            <input type="hidden" id="loginRole" name="role" value="student" />
+
+            <!-- Registration Number / Staff ID -->
+            <div class="form-group">
+              <label for="loginIdentifier" id="identifierLabel">
+                Registration Number
+              </label>
+
+              <div class="input-with-icon">
+                <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+
+                <input
+                  type="text"
+                  id="loginIdentifier"
+                  name="identifier"
+                  placeholder="Enter your registration number"
+                  autocomplete="username"
+                  autocapitalize="characters"
+                  spellcheck="false"
+                  required
+                />
+              </div>
+
+              <small class="form-help" id="identifierHelp">
+                Use the registration number associated with your student
+                account.
+              </small>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <div class="form-label-row">
+                <label for="loginPassword"> Password </label>
+
+                <!--
+                                login.js will update the role query
+                                parameter when Student or Staff changes.
+
+                                The recovery page will be implemented
+                                separately in a later step.
+                            -->
+                <a
+                  href="forgot-password.html?role=student"
+                  class="form-link"
+                  id="forgotPasswordLink"
+                >
+                  Forgot password?
+                </a>
+              </div>
+
+              <div class="input-with-icon password-input-wrapper">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+
+                <input
+                  type="password"
+                  id="loginPassword"
+                  name="password"
+                  placeholder="Enter your password"
+                  autocomplete="current-password"
+                  required
+                />
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="toggleLoginPassword"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember Account Identifier -->
+            <div class="form-options">
+              <label class="remember-option" for="rememberLogin">
+                <input type="checkbox" id="rememberLogin" name="remember" />
+
+                <span>Remember my ID</span>
+              </label>
+            </div>
+
+            <!-- Login Submit Button -->
+            <button
+              type="submit"
+              class="auth-submit-button"
+              id="loginSubmitButton"
+            >
+              <span id="loginButtonText"> Sign In as Student </span>
+
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+
+          <!-- =================================================
+                     REGISTRATION LINK
+                ================================================== -->
+          <p class="auth-switch-text">
+            Don't have an account?
+
+            <a href="register.html" id="registerLink"> Create an account </a>
+          </p>
+
+          <!-- Security Note -->
+          <div class="auth-security-note">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+
+            <span>
+              Keep your login credentials private. Always sign out when using a
+              shared computer.
+            </span>
+          </div>
+
+          <!-- Footer -->
+          <footer class="auth-page-footer">
+            <p>
+              &copy;
+              <span id="loginCurrentYear"></span>
+              University of Nigeria, Nsukka. All rights reserved.
+            </p>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <!-- Login Page JavaScript -->
+    <script src="js/login.js"></script>
+  </body>
+</html>

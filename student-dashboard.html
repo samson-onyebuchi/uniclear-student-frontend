@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Dashboard | UniClear</title>
+
+    <meta
+      name="description"
+      content="UniClear student clearance dashboard for the University of Nigeria, Nsukka."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/student-dashboard.css" />
+
+    <script src="js/student-dashboard.js" defer></script>
+  </head>
+
+  <body class="dashboard-page">
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+    <!-- ================================================
+         SIDEBAR
+    ================================================= -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <a href="index.html" class="sidebar-brand" aria-label="UniClear home">
+        <span class="brand-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </span>
+
+        <span class="brand-text">
+          <strong>UniClear</strong>
+          <small>Student Clearance Portal</small>
+        </span>
+      </a>
+
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar" id="studentAvatar">ST</div>
+
+        <div class="sidebar-profile-details">
+          <strong id="sidebarStudentName">Loading student...</strong>
+          <span id="sidebarStudentRegNo">Loading registration number...</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section-label">MAIN MENU</div>
+
+      <nav class="sidebar-navigation" aria-label="Student navigation">
+        <a
+          href="student-dashboard.html"
+          class="sidebar-link active"
+          aria-current="page"
+        >
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="student-profile.html" class="sidebar-link">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+
+        <a href="student-clearance.html" class="sidebar-link">
+          <i class="fa-solid fa-list-check"></i>
+          <span>My Clearance</span>
+        </a>
+
+        <a href="student-documents.html" class="sidebar-link">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>My Documents</span>
+        </a>
+
+        <div class="sidebar-section-label sidebar-section-spaced">ACCOUNT</div>
+
+        <a href="student-change-password.html" class="sidebar-link">
+          <i class="fa-solid fa-lock"></i>
+          <span>Change Password</span>
+        </a>
+
+        <a href="index.html" class="sidebar-link">
+          <i class="fa-solid fa-globe"></i>
+          <span>Visit Website</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-help">
+          <span class="help-icon">
+            <i class="fa-regular fa-circle-question"></i>
+          </span>
+
+          <div>
+            <strong>Need assistance?</strong>
+            <p>Contact your clearance office for support.</p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="sidebar-link sidebar-logout"
+          id="logoutButton"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ================================================
+         MAIN WORKSPACE
+    ================================================= -->
+    <main class="dashboard-main">
+      <!-- Top navigation -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Open navigation menu"
+            aria-controls="dashboardSidebar"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div class="topbar-page-title">
+            <span>STUDENT PORTAL</span>
+            <h2>Dashboard</h2>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-university">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>University of Nigeria, Nsukka</span>
+          </div>
+
+          <button
+            type="button"
+            class="topbar-profile-button"
+            id="topbarProfileButton"
+            aria-label="View my profile"
+            title="View my profile"
+          >
+            <span class="topbar-avatar" id="topbarAvatar">ST</span>
+
+            <span class="topbar-profile-name" id="topbarStudentName">
+              Student
+            </span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard content -->
+      <div class="dashboard-content">
+        <!-- Status / feedback message -->
+        <div
+          class="dashboard-message"
+          id="dashboardMessage"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <!-- ========================================
+                 PERSONALIZED WELCOME
+            ========================================= -->
+        <section class="dashboard-welcome">
+          <div class="welcome-text">
+            <span class="section-eyebrow">STUDENT OVERVIEW</span>
+
+            <h1 id="welcomeHeading">Welcome back</h1>
+
+            <p>
+              Manage your student clearance, monitor your progress, and keep
+              track of your submitted documents.
+            </p>
+          </div>
+
+          <div class="welcome-decoration" aria-hidden="true">
+            <div class="welcome-decoration-circle">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+                 STUDENT INFORMATION
+            ========================================= -->
+        <section class="dashboard-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="section-eyebrow">YOUR INFORMATION</span>
+              <h2>Student Information</h2>
+              <p>Your registered student details.</p>
+            </div>
+
+            <a
+              href="student-profile.html"
+              class="text-link"
+              id="viewFullProfileLink"
+            >
+              View full profile
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="student-information-card">
+            <div class="student-information-header">
+              <div class="student-information-avatar" id="profileAvatar">
+                ST
+              </div>
+
+              <div class="student-information-identity">
+                <h3 id="studentFullName">Loading student details...</h3>
+                <p id="studentRegNo">Loading registration number...</p>
+              </div>
+
+              <span class="account-status-badge" id="studentAccountStatus">
+                <span class="status-dot"></span>
+                Loading
+              </span>
+            </div>
+
+            <div class="student-information-divider"></div>
+
+            <div class="student-information-grid">
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-regular fa-envelope"></i>
+                  Email Address
+                </span>
+                <strong id="studentEmail">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-solid fa-phone"></i>
+                  Phone Number
+                </span>
+                <strong id="studentPhone">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-solid fa-building-columns"></i>
+                  Faculty
+                </span>
+                <strong id="studentFaculty">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-solid fa-book-open"></i>
+                  Department
+                </span>
+                <strong id="studentDepartment">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-regular fa-calendar"></i>
+                  Admission Year
+                </span>
+                <strong id="studentAdmissionYear">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-solid fa-user-graduate"></i>
+                  Student Category
+                </span>
+                <strong id="studentStudyCategory">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-solid fa-clock"></i>
+                  Study Duration
+                </span>
+                <strong id="studentStudyDuration">Loading...</strong>
+              </div>
+
+              <div class="information-item">
+                <span class="information-label">
+                  <i class="fa-solid fa-venus-mars"></i>
+                  Gender
+                </span>
+                <strong id="studentGender">Loading...</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+                 CLEARANCE SUMMARY
+            ========================================= -->
+        <section class="dashboard-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="section-eyebrow">CLEARANCE SUMMARY</span>
+              <h2>Your Clearance at a Glance</h2>
+              <p>See the current state of your clearance process.</p>
+            </div>
+          </div>
+
+          <div class="clearance-summary-grid">
+            <article class="summary-card">
+              <div class="summary-card-top">
+                <span class="summary-icon summary-icon-green">
+                  <i class="fa-solid fa-list-check"></i>
+                </span>
+                <span class="summary-caption">Overall status</span>
+              </div>
+
+              <h3 id="overallClearanceStatus">Not Started</h3>
+              <p id="overallStatusDescription">
+                Your clearance status will appear here.
+              </p>
+            </article>
+
+            <article class="summary-card">
+              <div class="summary-card-top">
+                <span class="summary-icon summary-icon-gold">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="summary-caption">Completed stages</span>
+              </div>
+
+              <h3>
+                <span id="approvedStagesCount">0</span>
+                <small>of 7 stages</small>
+              </h3>
+
+              <p>Stages approved by the clearance offices.</p>
+            </article>
+
+            <article class="summary-card">
+              <div class="summary-card-top">
+                <span class="summary-icon summary-icon-blue">
+                  <i class="fa-solid fa-folder-open"></i>
+                </span>
+                <span class="summary-caption">Documents</span>
+              </div>
+
+              <h3 id="uploadedDocumentsCount">0</h3>
+              <p>Documents uploaded to your clearance record.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ========================================
+                 CLEARANCE PROGRESS
+            ========================================= -->
+        <section class="dashboard-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="section-eyebrow">YOUR JOURNEY</span>
+              <h2>Clearance Progress</h2>
+              <p>Track your progress through all seven stages.</p>
+            </div>
+
+            <a href="student-clearance.html" class="text-link">
+              View clearance
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="progress-card">
+            <div class="progress-card-header">
+              <div>
+                <h3>Overall Completion</h3>
+                <p id="progressApprovedText">0 stages approved</p>
+              </div>
+
+              <strong id="progressPercentage">0%</strong>
+            </div>
+
+            <div
+              class="clearance-progress-bar"
+              id="clearanceProgressBar"
+              role="progressbar"
+              aria-label="Clearance completion"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <div
+                class="clearance-progress-fill"
+                id="clearanceProgressFill"
+                style="width: 0%"
+              ></div>
+            </div>
+
+            <div class="progress-card-footer">
+              <span id="progressRemainingText">7 stages remaining</span>
+
+              <span>
+                Current stage:
+                <strong id="currentClearanceStage">Not started</strong>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+                 CLEARANCE STAGES
+            ========================================= -->
+        <section class="dashboard-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="section-eyebrow">SEVEN REQUIRED STAGES</span>
+              <h2>Clearance Stages</h2>
+              <p>Follow the progress of each clearance office.</p>
+            </div>
+          </div>
+
+          <div class="clearance-stages-grid">
+            <article class="clearance-stage-card" data-stage="finance">
+              <div class="stage-card-icon stage-icon-green">
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Finance</h3>
+                <p class="stage-description">Financial clearance</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+
+            <article class="clearance-stage-card" data-stage="department">
+              <div class="stage-card-icon stage-icon-blue">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Department</h3>
+                <p class="stage-description">Departmental clearance</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+
+            <article class="clearance-stage-card" data-stage="faculty">
+              <div class="stage-card-icon stage-icon-gold">
+                <i class="fa-solid fa-building-columns"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Faculty</h3>
+                <p class="stage-description">Faculty clearance</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+
+            <article class="clearance-stage-card" data-stage="library">
+              <div class="stage-card-icon stage-icon-purple">
+                <i class="fa-solid fa-book"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Library</h3>
+                <p class="stage-description">Library clearance</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+
+            <article class="clearance-stage-card" data-stage="health">
+              <div class="stage-card-icon stage-icon-red">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Health</h3>
+                <p class="stage-description">Health services clearance</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+
+            <article class="clearance-stage-card" data-stage="student_affairs">
+              <div class="stage-card-icon stage-icon-teal">
+                <i class="fa-solid fa-people-group"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Student Affairs</h3>
+                <p class="stage-description">Student affairs clearance</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+
+            <article class="clearance-stage-card" data-stage="final">
+              <div class="stage-card-icon stage-icon-navy">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div class="stage-card-content">
+                <h3>Final Clearance</h3>
+                <p class="stage-description">Final clearance approval</p>
+                <span class="stage-status status-pending">Pending</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ========================================
+                 START CLEARANCE
+            ========================================= -->
+        <section
+          class="dashboard-section create-clearance-section"
+          id="createClearancePrompt"
+          hidden
+        >
+          <div class="create-clearance-card">
+            <div class="create-clearance-icon">
+              <i class="fa-solid fa-file-circle-plus"></i>
+            </div>
+
+            <div class="create-clearance-copy">
+              <h2>Ready to Begin Your Clearance?</h2>
+              <p>
+                Your student profile is available, but you do not have a
+                clearance record yet. Start the process to create your record
+                and begin with the Finance stage.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="primary-button"
+              id="createClearanceButton"
+            >
+              <i class="fa-solid fa-play"></i>
+              Start Clearance
+            </button>
+          </div>
+        </section>
+
+        <!-- ========================================
+                 QUICK ACTIONS
+            ========================================= -->
+        <section class="dashboard-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="section-eyebrow">SHORTCUTS</span>
+              <h2>Quick Actions</h2>
+              <p>Go directly to the section you need.</p>
+            </div>
+          </div>
+
+          <div class="quick-actions-grid">
+            <a href="student-profile.html" class="quick-action-card">
+              <span class="quick-action-icon">
+                <i class="fa-solid fa-user-pen"></i>
+              </span>
+              <span class="quick-action-copy">
+                <strong>View My Profile</strong>
+                <small>See your registered information</small>
+              </span>
+              <i class="fa-solid fa-chevron-right quick-action-arrow"></i>
+            </a>
+
+            <a href="student-clearance.html" class="quick-action-card">
+              <span class="quick-action-icon">
+                <i class="fa-solid fa-list-check"></i>
+              </span>
+              <span class="quick-action-copy">
+                <strong>My Clearance</strong>
+                <small>Check your stage-by-stage progress</small>
+              </span>
+              <i class="fa-solid fa-chevron-right quick-action-arrow"></i>
+            </a>
+
+            <a href="student-documents.html" class="quick-action-card">
+              <span class="quick-action-icon">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </span>
+              <span class="quick-action-copy">
+                <strong>My Documents</strong>
+                <small>View and manage uploaded documents</small>
+              </span>
+              <i class="fa-solid fa-chevron-right quick-action-arrow"></i>
+            </a>
+
+            <a href="student-change-password.html" class="quick-action-card">
+              <span class="quick-action-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+              </span>
+              <span class="quick-action-copy">
+                <strong>Account Security</strong>
+                <small>Change your account password</small>
+              </span>
+              <i class="fa-solid fa-chevron-right quick-action-arrow"></i>
+            </a>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+          <p>
+            &copy; <span id="dashboardCurrentYear"></span>
+            UniClear Student Clearance Portal
+          </p>
+
+          <span>University of Nigeria, Nsukka</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

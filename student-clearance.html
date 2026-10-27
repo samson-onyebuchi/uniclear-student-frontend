@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10233f" />
+
+    <title>My Clearance | UniClear Student Portal</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/student-clearance.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body class="student-clearance-page">
+    <!-- MOBILE SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- STUDENT SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+
+        <div class="brand-text">
+          <h2>UniClear</h2>
+          <span>Student Portal</span>
+        </div>
+
+        <button
+          type="button"
+          class="sidebar-close-button"
+          id="sidebarCloseButton"
+          aria-label="Close navigation menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-student-profile">
+        <div class="sidebar-avatar" id="sidebarStudentAvatar">S</div>
+
+        <div class="sidebar-student-info">
+          <h3 id="sidebarStudentName">Student</h3>
+          <p id="sidebarStudentRegNo">Registration Number</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-navigation" aria-label="Student navigation">
+        <p class="sidebar-section-title">MAIN MENU</p>
+
+        <a href="student-dashboard.html" class="sidebar-link">
+          <i class="fas fa-th-large"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a
+          href="student-clearance.html"
+          class="sidebar-link active"
+          aria-current="page"
+        >
+          <i class="fas fa-clipboard-check"></i>
+          <span>My Clearance</span>
+        </a>
+
+        <a href="student-documents.html" class="sidebar-link">
+          <i class="fas fa-folder-open"></i>
+          <span>My Documents</span>
+        </a>
+
+        <a href="student-profile.html" class="sidebar-link">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+
+        <p class="sidebar-section-title">ACCOUNT</p>
+
+        <a href="student-change-password.html" class="sidebar-link">
+          <i class="fas fa-lock"></i>
+          <span>Change Password</span>
+        </a>
+
+        <button
+          type="button"
+          class="sidebar-link sidebar-logout"
+          id="logoutButton"
+        >
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+
+        <div>
+          <strong>Secure Clearance</strong>
+          <p>Your clearance journey, simplified.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+      <!-- TOP BAR -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Open navigation menu"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="page-heading">
+            <div class="breadcrumb">
+              <span>Student Portal</span>
+              <i class="fas fa-chevron-right"></i>
+              <span>My Clearance</span>
+            </div>
+
+            <h1>My Clearance</h1>
+
+            <p>Track your clearance progress across all university offices.</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-date">
+            <i class="far fa-calendar-alt"></i>
+            <span id="currentDate">Loading date...</span>
+          </div>
+
+          <button
+            type="button"
+            class="topbar-profile-button"
+            id="topbarProfileButton"
+            aria-label="Open student profile"
+          >
+            <span class="topbar-avatar" id="topbarAvatar">S</span>
+
+            <span class="topbar-profile-info">
+              <strong id="topbarStudentName">Student</strong>
+              <small>Student Account</small>
+            </span>
+
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- CLEARANCE PAGE CONTENT -->
+      <section class="clearance-content">
+        <!-- API MESSAGE -->
+        <div
+          class="clearance-message"
+          id="clearanceMessage"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <!-- WELCOME CARD -->
+        <section class="clearance-welcome-card">
+          <div class="welcome-card-content">
+            <span class="welcome-eyebrow">
+              <i class="fas fa-route"></i>
+              YOUR CLEARANCE JOURNEY
+            </span>
+
+            <h2>Stay on track to graduation.</h2>
+
+            <p>
+              Monitor your final-year clearance, review office decisions, and
+              identify any outstanding requirements.
+            </p>
+
+            <div class="overall-status-line">
+              <span class="status-label">Overall status</span>
+
+              <span
+                class="status-badge status-in-progress"
+                id="overallClearanceStatus"
+              >
+                <i class="fas fa-spinner"></i>
+                Loading status
+              </span>
+            </div>
+          </div>
+
+          <div class="welcome-card-illustration" aria-hidden="true">
+            <div class="illustration-circle">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+
+            <div class="illustration-check illustration-check-one">
+              <i class="fas fa-check"></i>
+            </div>
+
+            <div class="illustration-check illustration-check-two">
+              <i class="fas fa-file-alt"></i>
+            </div>
+
+            <div class="illustration-check illustration-check-three">
+              <i class="fas fa-clipboard-check"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- SUMMARY CARDS -->
+        <section class="clearance-summary-grid" aria-label="Clearance summary">
+          <article class="summary-card">
+            <div class="summary-card-top">
+              <div class="summary-icon summary-icon-blue">
+                <i class="fas fa-layer-group"></i>
+              </div>
+
+              <span class="summary-card-label">Total stages</span>
+            </div>
+
+            <div class="summary-card-value" id="totalStages">7</div>
+
+            <p class="summary-card-description">Official clearance stages</p>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-card-top">
+              <div class="summary-icon summary-icon-green">
+                <i class="fas fa-check-circle"></i>
+              </div>
+
+              <span class="summary-card-label">Approved</span>
+            </div>
+
+            <div class="summary-card-value" id="approvedStages">0</div>
+
+            <p class="summary-card-description">
+              Stages successfully completed
+            </p>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-card-top">
+              <div class="summary-icon summary-icon-gold">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+
+              <span class="summary-card-label">In progress</span>
+            </div>
+
+            <div class="summary-card-value" id="pendingStages">0</div>
+
+            <p class="summary-card-description">
+              Stages awaiting action or review
+            </p>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-card-top">
+              <div class="summary-icon summary-icon-red">
+                <i class="fas fa-exclamation-circle"></i>
+              </div>
+
+              <span class="summary-card-label">Needs attention</span>
+            </div>
+
+            <div class="summary-card-value" id="rejectedStages">0</div>
+
+            <p class="summary-card-description">
+              Stages requiring your attention
+            </p>
+          </article>
+        </section>
+
+        <!-- OVERALL PROGRESS -->
+        <section class="clearance-panel clearance-progress-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Clearance progress</h2>
+              <p>See how far you have progressed through the process.</p>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-outline"
+              id="refreshClearanceButton"
+            >
+              <i class="fas fa-sync-alt"></i>
+              <span>Refresh</span>
+            </button>
+          </div>
+
+          <div class="progress-overview">
+            <div class="progress-percentage-block">
+              <strong id="clearanceProgressPercentage">0%</strong>
+              <span>Overall completion</span>
+            </div>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-heading">
+                <span>Approved stages</span>
+                <span id="progressStageCount">0 of 7 stages</span>
+              </div>
+
+              <div
+                class="progress-track"
+                id="clearanceProgressTrack"
+                role="progressbar"
+                aria-label="Clearance completion"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <div class="progress-fill" id="clearanceProgressFill"></div>
+              </div>
+
+              <p class="progress-help-text" id="progressHelpText">
+                Your clearance progress will appear here.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CLEARANCE STAGES -->
+        <section class="clearance-panel clearance-stages-panel">
+          <div class="panel-heading stages-panel-heading">
+            <div>
+              <h2>Clearance stages</h2>
+              <p>Follow the official order of your university clearance.</p>
+            </div>
+
+            <span class="stage-count-badge" id="stageCountBadge">
+              7 stages
+            </span>
+          </div>
+
+          <!-- LOADING STATE -->
+          <div class="clearance-loading-state" id="clearanceLoadingState">
+            <div class="loading-spinner"></div>
+            <p>Loading your clearance information...</p>
+          </div>
+
+          <!-- EMPTY STATE -->
+          <div class="clearance-empty-state" id="clearanceEmptyState" hidden>
+            <div class="empty-state-icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+
+            <h3 id="clearanceEmptyTitle">No clearance record found</h3>
+
+            <p id="clearanceEmptyDescription">
+              Your clearance record has not been loaded yet.
+            </p>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="createClearanceButton"
+            >
+              <i class="fas fa-plus-circle"></i>
+              Create Clearance
+            </button>
+          </div>
+
+          <!--
+                    JavaScript will populate this container with the
+                    student's actual clearance stages and statuses.
+                -->
+          <div
+            class="clearance-stages-list"
+            id="clearanceStagesList"
+            hidden
+          ></div>
+        </section>
+
+        <!-- REJECTED STAGES AND REQUIRED ACTIONS -->
+        <section
+          class="clearance-panel attention-panel"
+          id="clearanceAttentionPanel"
+          hidden
+        >
+          <div class="panel-heading">
+            <div>
+              <h2>
+                <i class="fas fa-exclamation-triangle"></i>
+                Attention required
+              </h2>
+
+              <p>
+                Review rejected stages and follow the instructions provided by
+                the relevant clearance office.
+              </p>
+            </div>
+          </div>
+
+          <div class="attention-list" id="clearanceAttentionList"></div>
+        </section>
+
+        <!-- HELPFUL INFORMATION -->
+        <section class="clearance-information-grid">
+          <article class="information-card">
+            <div class="information-card-icon">
+              <i class="fas fa-info-circle"></i>
+            </div>
+
+            <div>
+              <h3>How clearance works</h3>
+
+              <p>
+                Your clearance passes through designated university offices.
+                Each office reviews its stage before the process moves forward.
+              </p>
+            </div>
+          </article>
+
+          <article class="information-card">
+            <div class="information-card-icon information-icon-gold">
+              <i class="fas fa-file-upload"></i>
+            </div>
+
+            <div>
+              <h3>Keep your documents ready</h3>
+
+              <p>
+                If an office requests a correction or a new document, visit My
+                Documents to upload the required file.
+              </p>
+
+              <a href="student-documents.html" class="information-link">
+                Go to My Documents
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="dashboard-footer">
+          <p>
+            &copy; <span id="footerYear"></span>
+            UniClear Student Clearance Portal. All rights reserved.
+          </p>
+
+          <span>
+            <i class="fas fa-shield-alt"></i>
+            Secure Student Portal
+          </span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/navigation.js"></script>
+    <script src="js/student-clearance.js"></script>
+  </body>
+</html>

@@ -1,0 +1,654 @@
+/* =========================================================
+   UNICLEAR - UNIVERSITY OF NIGERIA, NSUKKA
+   File: Frontend/css/style.css
+   Purpose: Shared website styles and design foundation
+   ========================================================= */
+
+
+/* ==================== 1. CSS VARIABLES ==================== */
+
+:root {
+    --primary-color: #102b50;
+    --primary-dark: #091d37;
+    --primary-light: #1b416d;
+
+    --secondary-color: #18794e;
+    --secondary-dark: #11613d;
+    --secondary-light: #e8f5ed;
+
+    --accent-color: #d5a62e;
+    --accent-light: #fff6d9;
+
+    --background-color: #f5f7fb;
+    --surface-color: #ffffff;
+
+    --text-primary: #182536;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    --border-color: #e2e8f0;
+    --border-dark: #cbd5e1;
+
+    --success-color: #168653;
+    --warning-color: #b7791f;
+    --danger-color: #c53030;
+    --info-color: #2563a6;
+
+    --font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+
+    --container-width: 1200px;
+
+    --radius-small: 6px;
+    --radius-medium: 12px;
+    --radius-large: 20px;
+    --radius-pill: 999px;
+
+    --shadow-small: 0 2px 8px rgba(16, 43, 80, 0.06);
+    --shadow-medium: 0 8px 24px rgba(16, 43, 80, 0.09);
+    --shadow-large: 0 18px 45px rgba(16, 43, 80, 0.13);
+
+    --transition: all 0.25s ease;
+}
+
+
+/* ==================== 2. RESET ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--surface-color);
+    -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-family);
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+    outline-color: var(--secondary-color);
+}
+
+::selection {
+    color: #ffffff;
+    background: var(--primary-color);
+}
+
+
+/* ==================== 3. ACCESSIBILITY ==================== */
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 9999;
+    padding: 12px 18px;
+    color: #ffffff;
+    background: var(--primary-color);
+    border-radius: var(--radius-small);
+    box-shadow: var(--shadow-medium);
+}
+
+.skip-link:focus {
+    top: 16px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(24, 121, 78, 0.45);
+    outline-offset: 3px;
+}
+
+
+/* ==================== 4. CONTAINER ==================== */
+
+.container {
+    width: min(
+        var(--container-width),
+        calc(100% - 48px)
+    );
+    margin-inline: auto;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+
+/* ==================== 5. TYPOGRAPHY ==================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--primary-color);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: clamp(2.4rem, 5vw, 4.1rem);
+    letter-spacing: -1.8px;
+}
+
+h2 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    letter-spacing: -0.7px;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+strong {
+    font-weight: 700;
+}
+
+
+/* ==================== 6. BUTTONS ==================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 11px 20px;
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-small);
+
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
+}
+
+.btn-secondary {
+    color: var(--primary-color);
+    background: #ffffff;
+    border-color: var(--border-dark);
+}
+
+.btn-secondary:hover {
+    color: var(--primary-color);
+    background: var(--background-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline {
+    color: var(--primary-color);
+    background: transparent;
+    border-color: var(--border-dark);
+}
+
+.btn-outline:hover {
+    color: var(--primary-color);
+    background: var(--background-color);
+    border-color: var(--primary-color);
+}
+
+.btn-light {
+    color: var(--primary-color);
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.btn-light:hover {
+    color: var(--primary-dark);
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+.btn-cta-outline {
+    color: #ffffff;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+.btn-cta-outline:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+}
+
+.btn-large {
+    min-height: 52px;
+    padding: 14px 24px;
+    font-size: 1rem;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ==================== 7. FORM CONTROLS ==================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 14px;
+
+    color: var(--text-primary);
+    background: #ffffff;
+
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-small);
+
+    transition: var(--transition);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(24, 121, 78, 0.1);
+}
+
+.form-help {
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+}
+
+.form-error {
+    color: var(--danger-color);
+    font-size: 0.84rem;
+}
+
+
+/* ==================== 8. STATUS BADGES ==================== */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 5px 10px;
+    border-radius: var(--radius-pill);
+
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.status-approved {
+    color: #166534;
+    background: #dcfce7;
+}
+
+.status-pending {
+    color: #92400e;
+    background: #fef3c7;
+}
+
+.status-rejected {
+    color: #991b1b;
+    background: #fee2e2;
+}
+
+.status-review {
+    color: #1d4ed8;
+    background: #dbeafe;
+}
+
+
+/* ==================== 9. CARDS ==================== */
+
+.card {
+    padding: 24px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--shadow-small);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-medium);
+}
+
+
+/* ==================== 10. SECTION HEADINGS ==================== */
+
+.section-heading {
+    max-width: 720px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+.section-label {
+    display: inline-block;
+    margin-bottom: 12px;
+
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    max-width: 650px;
+    margin-inline: auto;
+    line-height: 1.8;
+}
+
+
+/* ==================== 11. TEXT LINKS ==================== */
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--secondary-color);
+    font-weight: 700;
+
+    transition: var(--transition);
+}
+
+.text-link:hover {
+    color: var(--secondary-dark);
+    gap: 13px;
+}
+
+.secondary-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.secondary-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+
+/* ==================== 12. DIVIDERS ==================== */
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    border: none;
+}
+
+
+/* ==================== 13. UTILITY CLASSES ==================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+.bg-light {
+    background: var(--background-color);
+}
+
+.bg-white {
+    background: #ffffff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-1 {
+    margin-top: 8px;
+}
+
+.mt-2 {
+    margin-top: 16px;
+}
+
+.mt-3 {
+    margin-top: 24px;
+}
+
+.mb-1 {
+    margin-bottom: 8px;
+}
+
+.mb-2 {
+    margin-bottom: 16px;
+}
+
+.mb-3 {
+    margin-bottom: 24px;
+}
+
+
+/* ==================== 14. LOGIN / AUTH SHARED HELPERS ==================== */
+
+/*
+   These are small shared helpers for the updated login page.
+   The detailed authentication layout remains in auth.css.
+*/
+
+.auth-page {
+    min-height: 100vh;
+    background: var(--background-color);
+}
+
+.auth-page a {
+    transition: var(--transition);
+}
+
+.auth-page button {
+    font-family: inherit;
+}
+
+.auth-page [hidden] {
+    display: none !important;
+}
+
+
+/* ==================== 15. AUTHENTICATION MESSAGES ==================== */
+
+/*
+   Supports the message states used by login.js.
+   auth.css may provide more specific visual styling.
+*/
+
+.auth-message {
+    width: 100%;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-small);
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.auth-message.success,
+.auth-message.auth-message-success {
+    color: #166534;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.auth-message.error,
+.auth-message.auth-message-error {
+    color: #991b1b;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.auth-message.info,
+.auth-message.auth-message-info {
+    color: #1e40af;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+
+/* ==================== 16. RESPONSIVE DEFAULTS ==================== */
+
+@media (max-width: 768px) {
+    .container {
+        width: calc(100% - 32px);
+    }
+
+    .section {
+        padding: 56px 0;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .btn {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 15px;
+    }
+
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .btn-large {
+        min-height: 48px;
+        padding: 12px 18px;
+        font-size: 0.94rem;
+    }
+}
+
+
+/* ==================== 17. REDUCED MOTION ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

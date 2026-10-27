@@ -1,0 +1,1044 @@
+
+/* =========================================================
+   UNICLEAR REGISTRATION PAGE
+   File: Frontend/css/register.css
+
+   FEATURES:
+   1. Professional navy-and-green UniClear design.
+   2. Student and Staff account selection.
+   3. Responsive student and staff registration forms.
+   4. Consistent form fields, validation, and password controls.
+   5. Accessible messages, buttons, and loading states.
+   6. Desktop, tablet, and mobile layouts.
+========================================================= */
+
+
+/* =========================================================
+   1. PAGE FOUNDATION
+========================================================= */
+
+body:has(.register-page) {
+    margin: 0;
+    min-height: 100vh;
+    background: #f4f7fb;
+    font-family: "Inter", Arial, sans-serif;
+    color: #243247;
+    -webkit-font-smoothing: antialiased;
+}
+
+.register-page,
+.register-page * {
+    box-sizing: border-box;
+}
+
+.register-page {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.4fr);
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.register-page input,
+.register-page select,
+.register-page button {
+    font: inherit;
+}
+
+.register-page [hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   2. LEFT BRANDING PANEL
+========================================================= */
+
+.register-brand-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    padding: 42px clamp(24px, 4vw, 58px);
+    overflow: hidden;
+    color: #ffffff;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(213, 166, 46, 0.17),
+            transparent 34%
+        ),
+        linear-gradient(
+            145deg,
+            #163d69 0%,
+            #102b50 58%,
+            #0b203d 100%
+        );
+}
+
+.register-brand-panel::before,
+.register-brand-panel::after {
+    position: absolute;
+    content: "";
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.register-brand-panel::before {
+    top: 20%;
+    left: -220px;
+    width: 380px;
+    height: 380px;
+}
+
+.register-brand-panel::after {
+    right: -180px;
+    bottom: -80px;
+    width: 300px;
+    height: 300px;
+}
+
+.register-brand-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.register-brand-panel .auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    text-decoration: none;
+}
+
+.register-brand-panel .auth-brand i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 13px;
+    color: #102b50;
+    background: #ffffff;
+    font-size: 23px;
+}
+
+.register-brand-content {
+    max-width: 490px;
+    margin: 70px 0;
+}
+
+.register-brand-content h1 {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-size: clamp(32px, 3.1vw, 47px);
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -1.5px;
+}
+
+.register-brand-content h1 span {
+    color: #f0c85c;
+}
+
+.register-brand-content p {
+    max-width: 420px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.register-benefits {
+    display: grid;
+    gap: 19px;
+    margin-top: 36px;
+}
+
+.register-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.register-benefit > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    color: #f0c85c;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 14px;
+}
+
+.register-benefit h3 {
+    margin: 1px 0 5px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.register-benefit p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.register-brand-footer {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   3. RIGHT FORM PANEL
+========================================================= */
+
+.register-form-panel {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    padding: 35px clamp(22px, 4vw, 64px);
+    background: #ffffff;
+}
+
+.register-form-container {
+    width: 100%;
+    max-width: 780px;
+    min-width: 0;
+    margin: 0 auto;
+}
+
+.register-topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.register-topbar a {
+    color: #18794e;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.register-topbar a:hover {
+    color: #105c3a;
+    text-decoration: underline;
+}
+
+.register-heading {
+    margin-bottom: 24px;
+}
+
+.register-heading .eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #18794e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.register-heading h2 {
+    margin: 0 0 10px;
+    color: #102b50;
+    font-size: clamp(27px, 2.4vw, 35px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+}
+
+.register-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   4. STUDENT / STAFF ACCOUNT SELECTOR
+========================================================= */
+
+.register-account-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.register-account-selector button,
+.register-account-button,
+#studentAccountButton,
+#staffAccountButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
+    min-height: 55px;
+    padding: 13px 16px;
+    border: 1px solid #dbe3ed;
+    border-radius: 10px;
+    color: #475569;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 750;
+    text-align: center;
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.register-account-selector button i,
+.register-account-button i,
+#studentAccountButton i,
+#staffAccountButton i {
+    font-size: 17px;
+}
+
+.register-account-selector button:hover,
+.register-account-button:hover,
+#studentAccountButton:hover,
+#staffAccountButton:hover {
+    border-color: #18794e;
+    color: #18794e;
+    background: #f7fcf9;
+}
+
+.register-account-selector button.active,
+.register-account-selector button[aria-pressed="true"],
+.register-account-button.active,
+#studentAccountButton[aria-pressed="true"],
+#staffAccountButton[aria-pressed="true"] {
+    border-color: #18794e;
+    color: #12623e;
+    background: #eaf6ef;
+    box-shadow: 0 0 0 2px rgba(24, 121, 78, 0.07);
+}
+
+.register-account-selector button:focus-visible,
+#studentAccountButton:focus-visible,
+#staffAccountButton:focus-visible {
+    outline: 3px solid rgba(24, 121, 78, 0.22);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   5. NOTIFICATION MESSAGES
+========================================================= */
+
+.register-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding: 13px 15px;
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+    color: #1e40af;
+    background: #eff6ff;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.register-notice i {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.register-notice p {
+    margin: 0;
+}
+
+.register-message {
+    display: none;
+    margin: 0 0 20px;
+    padding: 13px 15px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.register-message.visible {
+    display: block;
+}
+
+.register-message.success {
+    border-color: #a7f3d0;
+    color: #065f46;
+    background: #ecfdf5;
+}
+
+.register-message.error {
+    border-color: #fecaca;
+    color: #991b1b;
+    background: #fef2f2;
+}
+
+.register-message.info {
+    border-color: #bfdbfe;
+    color: #1e40af;
+    background: #eff6ff;
+}
+
+
+/* =========================================================
+   6. REGISTRATION FORM
+========================================================= */
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    width: 100%;
+    min-width: 0;
+}
+
+.register-form > div {
+    min-width: 0;
+}
+
+.register-section {
+    min-width: 0;
+    padding: 0 0 22px;
+    border-bottom: 1px solid #e8edf4;
+}
+
+.register-section:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.register-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 18px;
+}
+
+.register-section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 37px;
+    height: 37px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    color: #18794e;
+    background: #eaf6ef;
+    font-size: 15px;
+}
+
+.register-section-heading h3 {
+    margin: 0 0 4px;
+    color: #102b50;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.register-section-heading p {
+    margin: 0;
+    color: #8491a4;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   7. RESPONSIVE FIELD GRID
+========================================================= */
+
+.register-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
+    row-gap: 17px;
+    min-width: 0;
+}
+
+.register-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.register-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.register-field label {
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.register-field label .required,
+.register-field label span.required {
+    color: #dc2626;
+}
+
+.register-field input,
+.register-field select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 45px;
+    padding: 0 13px;
+    border: 1px solid #dbe3ed;
+    border-radius: 8px;
+    outline: none;
+    color: #1e293b;
+    background: #ffffff;
+    font-size: 13px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.register-field input::placeholder {
+    color: #a0aabb;
+    opacity: 1;
+}
+
+.register-field select {
+    cursor: pointer;
+}
+
+.register-field input:hover,
+.register-field select:hover {
+    border-color: #b7c5d6;
+}
+
+.register-field input:focus,
+.register-field select:focus {
+    border-color: #18794e;
+    box-shadow: 0 0 0 3px rgba(24, 121, 78, 0.11);
+}
+
+.register-field input:disabled,
+.register-field select:disabled {
+    cursor: not-allowed;
+    color: #94a3b8;
+    background: #f1f5f9;
+}
+
+.register-field .field-hint {
+    margin: 0;
+    color: #8491a4;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   8. STUDENT AND STAFF FIELD GROUPS
+========================================================= */
+
+#studentRegistrationFields,
+#staffRegistrationFields {
+    width: 100%;
+    min-width: 0;
+}
+
+#studentRegistrationFields[hidden],
+#staffRegistrationFields[hidden] {
+    display: none !important;
+}
+
+#studentRegistrationFields:not([hidden]),
+#staffRegistrationFields:not([hidden]) {
+    display: block;
+}
+
+#staffRegistrationFields .register-grid,
+#studentRegistrationFields .register-grid {
+    width: 100%;
+}
+
+#staffRegistrationFields .register-section-heading {
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   9. PASSWORD FIELDS
+========================================================= */
+
+.register-field .password-input-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.register-field .password-input-wrapper input {
+    padding-right: 45px;
+}
+
+.register-field .password-toggle,
+.register-field button[data-password-target] {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 30px;
+    padding: 0;
+    transform: translateY(-50%);
+    border: none;
+    color: #7c8ba1;
+    background: transparent;
+    cursor: pointer;
+}
+
+.register-field .password-toggle:hover,
+.register-field button[data-password-target]:hover {
+    color: #18794e;
+}
+
+.register-field button[data-password-target]:focus-visible {
+    outline: 2px solid #18794e;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   10. FIELD VALIDATION
+========================================================= */
+
+.register-field input.invalid,
+.register-field select.invalid,
+.register-field input[aria-invalid="true"],
+.register-field select[aria-invalid="true"] {
+    border-color: #dc2626;
+    background-color: #fffafa;
+}
+
+.register-field input.invalid:focus,
+.register-field select.invalid:focus,
+.register-field input[aria-invalid="true"]:focus,
+.register-field select[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.09);
+}
+
+.field-error {
+    display: none;
+    margin: 0;
+    color: #dc2626;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.field-error.visible {
+    display: block;
+}
+
+
+/* =========================================================
+   11. TERMS AND CONDITIONS
+========================================================= */
+
+.register-terms,
+.register-page .terms-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 21px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+.register-terms input[type="checkbox"],
+.register-page .terms-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin: 3px 0 0;
+    accent-color: #18794e;
+    cursor: pointer;
+}
+
+.register-terms label,
+.register-page .terms-row label {
+    cursor: pointer;
+}
+
+.register-terms a,
+.register-page .terms-row a {
+    color: #18794e;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.register-terms a:hover,
+.register-page .terms-row a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   12. SUBMIT BUTTON
+========================================================= */
+
+.register-submit,
+.register-page button[type="submit"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 49px;
+    margin-top: 23px;
+    padding: 13px 18px;
+    border: 1px solid #18794e;
+    border-radius: 9px;
+    color: #ffffff;
+    background: #18794e;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.register-submit:hover,
+.register-page button[type="submit"]:hover {
+    border-color: #12623e;
+    background: #12623e;
+    box-shadow: 0 5px 14px rgba(24, 121, 78, 0.17);
+}
+
+.register-submit:active,
+.register-page button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+.register-submit:focus-visible,
+.register-page button[type="submit"]:focus-visible {
+    outline: 3px solid rgba(24, 121, 78, 0.25);
+    outline-offset: 3px;
+}
+
+.register-submit:disabled,
+.register-page button[type="submit"]:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   13. LOADING INDICATOR
+========================================================= */
+
+.button-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: register-spin 0.7s linear infinite;
+}
+
+.loading .button-spinner,
+.button-spinner.visible {
+    display: inline-block;
+}
+
+@keyframes register-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   14. BOTTOM LINKS AND FOOTER
+========================================================= */
+
+.register-bottom,
+.register-page .register-login-link {
+    margin: 20px 0 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.register-bottom a,
+.register-page .register-login-link a {
+    color: #18794e;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.register-bottom a:hover,
+.register-page .register-login-link a:hover {
+    text-decoration: underline;
+}
+
+.register-page .register-footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid #edf1f6;
+    color: #94a3b8;
+    font-size: 10px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+
+/* =========================================================
+   15. ACCESSIBILITY AND FOCUS STATES
+========================================================= */
+
+.register-page a:focus-visible,
+.register-page input:focus-visible,
+.register-page select:focus-visible {
+    outline-color: #18794e;
+    outline-offset: 3px;
+}
+
+.register-page button:focus-visible {
+    outline-color: #18794e;
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   16. TABLET LAYOUT
+========================================================= */
+
+@media (max-width: 1000px) {
+    .register-page {
+        grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+    }
+
+    .register-brand-panel {
+        padding: 32px 25px;
+    }
+
+    .register-form-panel {
+        padding: 30px 27px;
+    }
+
+    .register-brand-content h1 {
+        font-size: 34px;
+    }
+
+    .register-grid {
+        column-gap: 13px;
+    }
+
+    .register-account-selector {
+        gap: 9px;
+    }
+}
+
+
+/* =========================================================
+   17. MOBILE LAYOUT
+========================================================= */
+
+@media (max-width: 760px) {
+    .register-page {
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .register-brand-panel {
+        min-height: auto;
+        padding: 23px 22px 25px;
+    }
+
+    .register-brand-panel .auth-brand {
+        font-size: 22px;
+    }
+
+    .register-brand-panel .auth-brand i {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .register-brand-content {
+        margin: 27px 0 20px;
+    }
+
+    .register-brand-content h1 {
+        max-width: 480px;
+        margin-bottom: 11px;
+        font-size: clamp(27px, 7vw, 36px);
+        letter-spacing: -0.8px;
+    }
+
+    .register-brand-content > p {
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .register-benefits {
+        display: none;
+    }
+
+    .register-brand-footer {
+        padding-top: 14px;
+        font-size: 10px;
+    }
+
+    .register-form-panel {
+        padding: 26px 20px 35px;
+    }
+
+    .register-form-container {
+        max-width: 560px;
+    }
+
+    .register-topbar {
+        margin-bottom: 25px;
+        font-size: 12px;
+    }
+
+    .register-heading h2 {
+        font-size: 29px;
+    }
+
+    .register-account-selector {
+        gap: 10px;
+    }
+
+    .register-account-selector button,
+    #studentAccountButton,
+    #staffAccountButton {
+        min-height: 52px;
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   18. SMALL MOBILE SCREENS
+========================================================= */
+
+@media (max-width: 480px) {
+    .register-brand-panel {
+        padding: 20px 18px 22px;
+    }
+
+    .register-form-panel {
+        padding: 23px 17px 30px;
+    }
+
+    .register-grid {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 15px;
+    }
+
+    .register-field.full-width {
+        grid-column: auto;
+    }
+
+    .register-heading {
+        margin-bottom: 22px;
+    }
+
+    .register-heading h2 {
+        font-size: 26px;
+    }
+
+    .register-heading p {
+        font-size: 12px;
+    }
+
+    .register-form {
+        gap: 20px;
+    }
+
+    .register-section {
+        padding-bottom: 19px;
+    }
+
+    .register-section-heading {
+        margin-bottom: 15px;
+    }
+
+    .register-field input,
+    .register-field select {
+        height: 46px;
+        font-size: 13px;
+    }
+
+    .register-account-selector {
+        gap: 8px;
+    }
+
+    .register-account-selector button,
+    #studentAccountButton,
+    #staffAccountButton {
+        min-height: 49px;
+        padding: 10px 7px;
+        font-size: 11px;
+    }
+
+    .register-submit,
+    .register-page button[type="submit"] {
+        min-height: 48px;
+    }
+}
+
+
+/* =========================================================
+   19. REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .register-page *,
+    .register-page *::before,
+    .register-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

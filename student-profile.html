@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile | UniClear</title>
+
+    <meta
+        name="description"
+        content="View your personal information and academic details on the UniClear Student Clearance Portal."
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="css/student-profile.css">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         MOBILE SIDEBAR OVERLAY
+    =========================================== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ==========================================
+         STUDENT PORTAL LAYOUT
+    =========================================== -->
+    <div class="portal-layout">
+
+        <!-- ======================================
+             SIDEBAR
+        ======================================= -->
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div class="brand-text">
+                    <h2>UniClear</h2>
+                    <span>Student Portal</span>
+                </div>
+
+                <button
+                    type="button"
+                    class="sidebar-close-button"
+                    id="sidebarCloseButton"
+                    aria-label="Close navigation menu"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Student information -->
+            <div class="sidebar-student">
+                <div class="student-avatar" id="sidebarStudentAvatar">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+
+                <div class="sidebar-student-info">
+                    <h3 id="sidebarStudentName">Student Name</h3>
+                    <p id="sidebarStudentRegNo">Registration Number</p>
+                </div>
+            </div>
+
+            <!-- Main navigation -->
+            <nav class="sidebar-navigation" aria-label="Main navigation">
+
+                <p class="nav-section-title">MAIN MENU</p>
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="student-clearance.html" class="nav-link">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>My Clearance</span>
+                </a>
+
+                <a href="student-documents.html" class="nav-link">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>My Documents</span>
+                </a>
+
+                <a
+                    href="student-profile.html"
+                    class="nav-link active"
+                    aria-current="page"
+                >
+                    <i class="fa-solid fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+
+                <p class="nav-section-title">ACCOUNT</p>
+
+                <a href="student-change-password.html" class="nav-link">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Change Password</span>
+                </a>
+
+            </nav>
+
+            <!-- Sidebar footer -->
+            <div class="sidebar-footer">
+                <div class="sidebar-help">
+                    <div class="help-icon">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </div>
+
+                    <div>
+                        <h4>Need assistance?</h4>
+                        <p>Contact your school clearance office.</p>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- ======================================
+             MAIN CONTENT
+        ======================================= -->
+        <main class="main-content">
+
+            <!-- ==================================
+                 TOP BAR
+            =================================== -->
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        type="button"
+                        class="mobile-menu-button"
+                        id="mobileMenuButton"
+                        aria-label="Open navigation menu"
+                    >
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <div class="page-heading">
+                        <h1>My Profile</h1>
+                        <p>View your personal and academic information.</p>
+                    </div>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <div class="topbar-date">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span id="currentDate">Loading date...</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="topbar-profile"
+                        id="topbarProfileButton"
+                        aria-label="Student profile"
+                    >
+                        <span class="topbar-avatar" id="topbarAvatar">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </span>
+
+                        <span class="topbar-profile-text">
+                            <strong id="topbarStudentName">Student</strong>
+                            <small>Student Account</small>
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- ==================================
+                 PROFILE PAGE CONTENT
+            =================================== -->
+            <div class="page-content">
+
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <a href="student-dashboard.html">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                    <span>My Profile</span>
+                </div>
+
+                <!-- ==================================
+                     PROFILE MESSAGE
+                =================================== -->
+                <div
+                    class="profile-message"
+                    id="profileMessage"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                ></div>
+
+                <!-- ==================================
+                     PROFILE OVERVIEW
+                =================================== -->
+                <section class="profile-overview">
+
+                    <div class="profile-cover"></div>
+
+                    <div class="profile-overview-content">
+
+                        <div class="profile-avatar" id="profileAvatar">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+
+                        <div class="profile-overview-details">
+                            <div class="profile-name-row">
+                                <h2 id="profileFullName">Student Name</h2>
+
+                                <span
+                                    class="account-status-badge"
+                                    id="profileAccountStatus"
+                                >
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span>Account Status</span>
+                                </span>
+                            </div>
+
+                            <p
+                                class="profile-registration-number"
+                                id="profileRegNo"
+                            >
+                                <i class="fa-solid fa-id-card"></i>
+                                <span>Registration Number</span>
+                            </p>
+
+                            <p class="profile-department" id="profileDepartment">
+                                <i class="fa-solid fa-building-columns"></i>
+                                <span>Department</span>
+                            </p>
+                        </div>
+
+                        <div class="profile-overview-action">
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="refreshProfileButton"
+                            >
+                                <i class="fa-solid fa-rotate"></i>
+                                Refresh Profile
+                            </button>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- ==================================
+                     PROFILE SUMMARY CARDS
+                =================================== -->
+                <section class="profile-summary-grid">
+
+                    <article class="summary-card">
+                        <div class="summary-card-icon green-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <div class="summary-card-content">
+                            <p>Student Category</p>
+                            <h3 id="profileStudentCategory">Not available</h3>
+                            <span>Based on study duration</span>
+                        </div>
+                    </article>
+
+                    <article class="summary-card">
+                        <div class="summary-card-icon blue-icon">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+
+                        <div class="summary-card-content">
+                            <p>Faculty</p>
+                            <h3 id="profileFacultySummary">Not available</h3>
+                            <span>Your registered faculty</span>
+                        </div>
+                    </article>
+
+                    <article class="summary-card">
+                        <div class="summary-card-icon gold-icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+
+                        <div class="summary-card-content">
+                            <p>Admission Year</p>
+                            <h3 id="profileAdmissionYearSummary">Not available</h3>
+                            <span>Year of admission</span>
+                        </div>
+                    </article>
+
+                </section>
+
+                <!-- ==================================
+                     PERSONAL INFORMATION
+                =================================== -->
+                <section class="profile-section">
+
+                    <div class="section-header">
+                        <div class="section-header-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div class="section-header-text">
+                            <h2>Personal Information</h2>
+                            <p>Your personal details as recorded in UniClear.</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-information-grid">
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-user"></i>
+                                Surname
+                            </span>
+                            <strong id="profileSurname">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-user"></i>
+                                First Name
+                            </span>
+                            <strong id="profileFirstName">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-user"></i>
+                                Other Names
+                            </span>
+                            <strong id="profileOtherNames">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-venus-mars"></i>
+                                Gender
+                            </span>
+                            <strong id="profileGender">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-envelope"></i>
+                                Email Address
+                            </span>
+                            <strong id="profileEmail">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-phone"></i>
+                                Phone Number
+                            </span>
+                            <strong id="profilePhoneNumber">Not available</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- ==================================
+                     ACADEMIC INFORMATION
+                =================================== -->
+                <section class="profile-section">
+
+                    <div class="section-header">
+                        <div class="section-header-icon academic-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <div class="section-header-text">
+                            <h2>Academic Information</h2>
+                            <p>Your registered university and academic details.</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-information-grid">
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-id-card"></i>
+                                Registration Number
+                            </span>
+                            <strong id="academicRegNo">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-building-columns"></i>
+                                Faculty
+                            </span>
+                            <strong id="academicFaculty">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-book-open"></i>
+                                Department
+                            </span>
+                            <strong id="academicDepartment">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-calendar-plus"></i>
+                                Admission Year
+                            </span>
+                            <strong id="academicAdmissionYear">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-clock"></i>
+                                Study Duration
+                            </span>
+                            <strong id="academicStudyDuration">Not available</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-user-check"></i>
+                                Student Status
+                            </span>
+                            <strong id="academicStudentStatus">Not available</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- ==================================
+                     ACCOUNT INFORMATION
+                =================================== -->
+                <section class="profile-section">
+
+                    <div class="section-header">
+                        <div class="section-header-icon account-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div class="section-header-text">
+                            <h2>Account Information</h2>
+                            <p>Information about your UniClear account.</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-information-grid">
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-user-tag"></i>
+                                Account Role
+                            </span>
+                            <strong id="profileRole">Student</strong>
+                        </div>
+
+                        <div class="information-item">
+                            <span class="information-label">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Account Status
+                            </span>
+                            <strong id="profileAccountStatusDetails">
+                                Not available
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <div class="account-security-note">
+                        <div class="security-note-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div>
+                            <h3>Keep your account secure</h3>
+                            <p>
+                                Keep your login credentials private. If you need
+                                to update your password, use the Change Password
+                                page.
+                            </p>
+
+                            <a href="student-change-password.html">
+                                Change Password
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ==================================
+                     PROFILE PAGE FOOTER
+                =================================== -->
+                <footer class="page-footer">
+                    <p>
+                        &copy; <span id="footerYear"></span>
+                        UniClear Student Clearance Portal.
+                    </p>
+
+                    <p>Student Services</p>
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+    <script src="js/navigation.js"></script>
+    <script src="js/student-profile.js"></script>
+
+</body>
+</html>

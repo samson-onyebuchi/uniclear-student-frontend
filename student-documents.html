@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10233f" />
+
+    <title>My Documents | UniClear Student Portal</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/student-dashboard.css" />
+    <link rel="stylesheet" href="css/student-documents.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body class="student-documents-page">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+
+        <div class="brand-text">
+          <h2>UniClear</h2>
+          <span>Student Portal</span>
+        </div>
+
+        <button
+          type="button"
+          class="sidebar-close-button"
+          id="sidebarCloseButton"
+          aria-label="Close navigation menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-student-card">
+        <div class="student-avatar" id="sidebarStudentAvatar">ST</div>
+
+        <div class="sidebar-student-info">
+          <h3 id="sidebarStudentName">Student Name</h3>
+          <p id="sidebarStudentRegNo">Registration Number</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-navigation" aria-label="Student navigation">
+        <p class="sidebar-section-label">MAIN MENU</p>
+
+        <a href="student-dashboard.html" class="sidebar-link">
+          <i class="fas fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="student-clearance.html" class="sidebar-link">
+          <i class="fas fa-list-check"></i>
+          <span>My Clearance</span>
+        </a>
+
+        <a
+          href="student-documents.html"
+          class="sidebar-link active"
+          aria-current="page"
+        >
+          <i class="fas fa-folder-open"></i>
+          <span>My Documents</span>
+          <span class="sidebar-link-count" id="sidebarDocumentCount">0</span>
+        </a>
+
+        <a href="student-profile.html" class="sidebar-link">
+          <i class="fas fa-user"></i>
+          <span>My Profile</span>
+        </a>
+
+        <p class="sidebar-section-label">ACCOUNT</p>
+
+        <a href="student-change-password.html" class="sidebar-link">
+          <i class="fas fa-lock"></i>
+          <span>Change Password</span>
+        </a>
+
+        <button
+          type="button"
+          class="sidebar-link sidebar-logout"
+          id="logoutButton"
+        >
+          <i class="fas fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-icon">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>UniClear Portal</strong>
+          <p>Student Clearance System</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+      <!-- TOPBAR -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Open navigation menu"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="page-heading">
+            <div class="breadcrumb">
+              <a href="student-dashboard.html">Dashboard</a>
+              <i class="fas fa-chevron-right"></i>
+              <span>My Documents</span>
+            </div>
+
+            <h1>My Documents</h1>
+            <p>Upload, manage, and track your clearance documents.</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="topbar-date">
+            <i class="far fa-calendar"></i>
+            <span id="currentDate">Loading date...</span>
+          </div>
+
+          <button
+            type="button"
+            class="topbar-profile-button"
+            id="topbarProfileButton"
+            aria-label="View student profile"
+          >
+            <span class="topbar-avatar" id="topbarAvatar">ST</span>
+
+            <span class="topbar-profile-details">
+              <strong id="topbarStudentName">Student Name</strong>
+              <small>Student</small>
+            </span>
+
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGE BODY -->
+      <div class="dashboard-content">
+        <!-- WELCOME SECTION -->
+        <section class="documents-welcome-section">
+          <div>
+            <span class="section-eyebrow">
+              <i class="fas fa-folder-open"></i>
+              DOCUMENT MANAGEMENT
+            </span>
+
+            <h2>Manage Your Clearance Documents</h2>
+
+            <p>
+              Upload the required documents for your clearance stages and
+              monitor their review status from one place.
+            </p>
+          </div>
+
+          <div class="documents-welcome-icon">
+            <i class="fas fa-file-circle-check"></i>
+          </div>
+        </section>
+
+        <!-- NOTIFICATION MESSAGE -->
+        <div
+          class="page-message"
+          id="documentsMessage"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <!-- DOCUMENT STATISTICS -->
+        <section class="documents-statistics">
+          <article class="document-stat-card">
+            <div class="document-stat-icon total-icon">
+              <i class="fas fa-folder"></i>
+            </div>
+
+            <div>
+              <p>Total Documents</p>
+              <h3 id="totalDocuments">0</h3>
+              <span>All submitted documents</span>
+            </div>
+          </article>
+
+          <article class="document-stat-card">
+            <div class="document-stat-icon pending-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+
+            <div>
+              <p>Under Review</p>
+              <h3 id="pendingDocuments">0</h3>
+              <span>Awaiting officer review</span>
+            </div>
+          </article>
+
+          <article class="document-stat-card">
+            <div class="document-stat-icon approved-icon">
+              <i class="fas fa-circle-check"></i>
+            </div>
+
+            <div>
+              <p>Approved</p>
+              <h3 id="approvedDocuments">0</h3>
+              <span>Documents accepted</span>
+            </div>
+          </article>
+
+          <article class="document-stat-card">
+            <div class="document-stat-icon rejected-icon">
+              <i class="fas fa-circle-xmark"></i>
+            </div>
+
+            <div>
+              <p>Rejected</p>
+              <h3 id="rejectedDocuments">0</h3>
+              <span>May require replacement</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- UPLOAD DOCUMENT SECTION -->
+        <section class="content-card upload-document-card">
+          <div class="content-card-header">
+            <div class="content-card-heading">
+              <div class="content-card-icon">
+                <i class="fas fa-cloud-arrow-up"></i>
+              </div>
+
+              <div>
+                <h2>Upload a Document</h2>
+                <p>Select the clearance stage and choose your file.</p>
+              </div>
+            </div>
+
+            <span class="required-field-note">
+              <span>*</span> Required fields
+            </span>
+          </div>
+
+          <div class="upload-information">
+            <i class="fas fa-circle-info"></i>
+
+            <p>
+              Accepted file formats are PDF, DOC, and DOCX. Ensure your document
+              is clear and readable before uploading.
+            </p>
+          </div>
+
+          <form id="documentUploadForm" enctype="multipart/form-data">
+            <!-- REGISTRATION NUMBER -->
+            <div class="form-field">
+              <label for="uploadRegNo">
+                Registration Number <span>*</span>
+              </label>
+
+              <div class="input-with-icon">
+                <i class="fas fa-id-card"></i>
+
+                <input
+                  type="text"
+                  id="uploadRegNo"
+                  name="reg_no"
+                  placeholder="Your registration number"
+                  autocomplete="off"
+                  readonly
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- CLEARANCE STAGE -->
+            <div class="form-field">
+              <label for="documentStage">
+                Clearance Stage <span>*</span>
+              </label>
+
+              <div class="input-with-icon">
+                <i class="fas fa-diagram-project"></i>
+
+                <select id="documentStage" name="stage" required>
+                  <option value="">Select clearance stage</option>
+                  <option value="finance">Finance</option>
+                  <option value="department">Department</option>
+                  <option value="faculty">Faculty</option>
+                  <option value="library">Library</option>
+                  <option value="health">Health Services</option>
+                  <option value="student_affairs">Student Affairs</option>
+                  <option value="final">Final Clearance</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- DOCUMENT NAME -->
+            <div class="form-field">
+              <label for="documentName"> Document Name <span>*</span> </label>
+
+              <div class="input-with-icon">
+                <i class="fas fa-file-lines"></i>
+
+                <input
+                  type="text"
+                  id="documentName"
+                  name="document_name"
+                  placeholder="e.g. School Fees Receipt"
+                  maxlength="150"
+                  required
+                />
+              </div>
+
+              <small>
+                Enter the document name, for example, School Fees Receipt.
+              </small>
+            </div>
+
+            <!-- DOCUMENT FILE -->
+            <div class="form-field file-upload-field">
+              <label for="documentFile"> Select Document <span>*</span> </label>
+
+              <div class="file-drop-zone" id="fileDropZone">
+                <input
+                  type="file"
+                  id="documentFile"
+                  name="document"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  required
+                />
+
+                <div class="file-drop-content" id="fileDropContent">
+                  <div class="file-upload-icon">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                  </div>
+
+                  <h3>Choose a document</h3>
+
+                  <p>Select a PDF, DOC, or DOCX file from your computer.</p>
+
+                  <span class="file-browse-label">Browse Files</span>
+                </div>
+
+                <div
+                  class="selected-file-preview"
+                  id="selectedFilePreview"
+                  hidden
+                >
+                  <div class="selected-file-icon">
+                    <i class="fas fa-file-lines"></i>
+                  </div>
+
+                  <div class="selected-file-details">
+                    <strong id="selectedFileName"> No file selected </strong>
+
+                    <span id="selectedFileSize">0 KB</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    id="removeSelectedFile"
+                    class="remove-selected-file"
+                    aria-label="Remove selected file"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- UPLOAD PROGRESS -->
+            <div
+              class="upload-progress-container"
+              id="uploadProgressContainer"
+              hidden
+            >
+              <div class="upload-progress-heading">
+                <span id="uploadProgressLabel"> Uploading document... </span>
+
+                <span id="uploadProgressPercent">0%</span>
+              </div>
+
+              <div
+                class="upload-progress-track"
+                id="uploadProgressTrack"
+                role="progressbar"
+                aria-label="Document upload progress"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <div class="upload-progress-bar" id="uploadProgressBar"></div>
+              </div>
+            </div>
+
+            <!-- FORM BUTTONS -->
+            <div class="upload-form-actions">
+              <button
+                type="reset"
+                class="button button-secondary"
+                id="resetUploadForm"
+              >
+                <i class="fas fa-rotate-left"></i>
+                Clear Form
+              </button>
+
+              <button
+                type="submit"
+                class="button button-primary"
+                id="uploadDocumentButton"
+              >
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span id="uploadButtonText">Upload Document</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- SUBMITTED DOCUMENTS -->
+        <section class="content-card documents-list-card">
+          <div class="content-card-header documents-list-header">
+            <div class="content-card-heading">
+              <div class="content-card-icon documents-list-icon">
+                <i class="fas fa-folder-open"></i>
+              </div>
+
+              <div>
+                <h2>Submitted Documents</h2>
+                <p>View and track documents submitted for clearance.</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="button button-outline"
+              id="refreshDocumentsButton"
+            >
+              <i class="fas fa-rotate"></i>
+              Refresh
+            </button>
+          </div>
+
+          <!-- SEARCH AND FILTERS -->
+          <div class="documents-toolbar">
+            <div class="documents-search">
+              <i class="fas fa-magnifying-glass"></i>
+
+              <input
+                type="search"
+                id="documentSearch"
+                placeholder="Search document name..."
+                aria-label="Search documents by name"
+              />
+            </div>
+
+            <div class="documents-filters">
+              <select id="stageFilter" aria-label="Filter by clearance stage">
+                <option value="">All Stages</option>
+                <option value="finance">Finance</option>
+                <option value="department">Department</option>
+                <option value="faculty">Faculty</option>
+                <option value="library">Library</option>
+                <option value="health">Health Services</option>
+                <option value="student_affairs">Student Affairs</option>
+                <option value="final">Final Clearance</option>
+              </select>
+
+              <select id="statusFilter" aria-label="Filter by document status">
+                <option value="">All Statuses</option>
+                <option value="under_review">Under Review</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- DOCUMENT TABLE -->
+          <div class="documents-table-wrapper">
+            <table class="documents-table">
+              <thead>
+                <tr>
+                  <th scope="col">Document</th>
+                  <th scope="col">Clearance Stage</th>
+                  <th scope="col">Date Submitted</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Officer's Feedback</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="documentsTableBody">
+                <!-- Document rows will be inserted by JavaScript. -->
+              </tbody>
+            </table>
+
+            <!-- EMPTY STATE -->
+            <div class="documents-empty-state" id="documentsEmptyState" hidden>
+              <div class="empty-state-icon">
+                <i class="fas fa-folder-open"></i>
+              </div>
+
+              <h3 id="documentsEmptyTitle">No documents found</h3>
+
+              <p id="documentsEmptyDescription">
+                Your submitted documents will appear here.
+              </p>
+
+              <button
+                type="button"
+                class="button button-primary"
+                id="emptyStateUploadButton"
+              >
+                <i class="fas fa-cloud-arrow-up"></i>
+                Upload Your First Document
+              </button>
+            </div>
+
+            <!-- LOADING STATE -->
+            <div
+              class="documents-loading-state"
+              id="documentsLoadingState"
+              hidden
+            >
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Loading your documents...</p>
+            </div>
+          </div>
+
+          <!-- TABLE FOOTER -->
+          <div class="documents-table-footer">
+            <p id="documentsResultCount" aria-live="polite">
+              Showing 0 documents
+            </p>
+
+            <button
+              type="button"
+              class="button button-text"
+              id="clearDocumentFiltersButton"
+            >
+              Clear Filters
+            </button>
+          </div>
+        </section>
+
+        <!-- DOCUMENT STATUS GUIDE -->
+        <section class="content-card document-status-guide">
+          <div class="content-card-header">
+            <div class="content-card-heading">
+              <div class="content-card-icon">
+                <i class="fas fa-circle-question"></i>
+              </div>
+
+              <div>
+                <h2>Understanding Document Status</h2>
+                <p>Learn what each status means.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="status-guide-grid">
+            <div class="status-guide-item">
+              <span class="status-badge status-pending">
+                <i class="fas fa-clock"></i>
+                Pending
+              </span>
+
+              <p>The document is awaiting review.</p>
+            </div>
+
+            <div class="status-guide-item">
+              <span class="status-badge status-under-review">
+                <i class="fas fa-magnifying-glass"></i>
+                Under Review
+              </span>
+
+              <p>The assigned officer is reviewing the document.</p>
+            </div>
+
+            <div class="status-guide-item">
+              <span class="status-badge status-approved">
+                <i class="fas fa-check-circle"></i>
+                Approved
+              </span>
+
+              <p>The document has been accepted by the officer.</p>
+            </div>
+
+            <div class="status-guide-item">
+              <span class="status-badge status-rejected">
+                <i class="fas fa-times-circle"></i>
+                Rejected
+              </span>
+
+              <p>
+                Check the officer's feedback and submit a corrected document if
+                required.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- HELP NOTICE -->
+        <section class="documents-help-notice">
+          <div class="help-notice-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+
+          <div>
+            <h3>Need to check your clearance progress?</h3>
+
+            <p>
+              Visit your clearance page to review the progress of your clearance
+              stages.
+            </p>
+          </div>
+
+          <a href="student-clearance.html" class="help-notice-link">
+            View Clearance
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="dashboard-footer">
+          <p>
+            &copy; <span id="footerYear"></span>
+            UniClear Student Clearance Portal. All rights reserved.
+          </p>
+
+          <span>
+            <i class="fas fa-shield-halved"></i>
+            Secure Student Portal
+          </span>
+        </footer>
+      </div>
+    </main>
+
+    <!-- DOCUMENT PREVIEW MODAL -->
+    <div
+      class="document-modal"
+      id="documentPreviewModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="documentPreviewTitle"
+      hidden
+    >
+      <div class="document-modal-backdrop" id="documentModalBackdrop"></div>
+
+      <div class="document-modal-content">
+        <div class="document-modal-header">
+          <div>
+            <h2 id="documentPreviewTitle">Document Details</h2>
+            <p id="documentPreviewSubtitle">Review your submitted document.</p>
+          </div>
+
+          <button
+            type="button"
+            class="document-modal-close"
+            id="closeDocumentPreview"
+            aria-label="Close document details"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="document-modal-body" id="documentPreviewBody">
+          <!-- Document details will be inserted by JavaScript. -->
+        </div>
+
+        <div class="document-modal-footer">
+          <button
+            type="button"
+            class="button button-secondary"
+            id="cancelDocumentPreview"
+          >
+            Close
+          </button>
+
+          <a
+            href="#"
+            class="button button-primary"
+            id="downloadDocumentLink"
+            hidden
+          >
+            <i class="fas fa-download"></i>
+            Download Document
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="js/navigation.js"></script>
+    <script src="js/student-documents.js"></script>
+  </body>
+</html>

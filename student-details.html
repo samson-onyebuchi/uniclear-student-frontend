@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Review a student's profile, clearance progress, submitted documents and stage history in UniClear."
+    />
+    <title>Student Details | UniClear Staff Portal</title>
+    <link rel="stylesheet" href="css/student-details.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout details-layout">
+      <!-- =============================================
+             STAFF SIDEBAR
+        ============================================== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-logo" aria-hidden="true">U</div>
+          <div class="brand-details">
+            <h2>UniClear</h2>
+            <p>Staff Portal</p>
+          </div>
+          <button
+            type="button"
+            class="sidebar-close"
+            id="closeSidebarBtn"
+            aria-label="Close navigation"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="sidebar-section-label">WORKSPACE</div>
+        <nav class="sidebar-navigation" aria-label="Staff workspace navigation">
+          <a href="staff-dashboard.html#dashboard" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="staff-dashboard.html#clearance-work"
+            class="nav-link active"
+            aria-current="page"
+          >
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            <span>Clearance Work</span>
+          </a>
+          <a href="staff-dashboard.html#stage-otp" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">⌑</span>
+            <span>Verify Stage OTP</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-section-label">ACCOUNT</div>
+        <nav class="sidebar-navigation" aria-label="Staff account navigation">
+          <a href="staff-dashboard.html#staff-profile" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">◉</span>
+            <span>My Profile</span>
+          </a>
+          <a href="staff-dashboard.html#change-password" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">♙</span>
+            <span>Change Password</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="sidebar-user">
+            <div class="avatar" id="sidebarAvatar">S</div>
+            <div class="sidebar-user-details">
+              <strong id="sidebarStaffName">Staff Member</strong>
+              <span id="sidebarStaffRole">Clearance Officer</span>
+            </div>
+          </div>
+          <button type="button" class="logout-button" id="logoutBtn">
+            <span class="nav-icon" aria-hidden="true">↪</span>
+            <span>Log Out</span>
+          </button>
+        </div>
+      </aside>
+
+      <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+      <!-- =============================================
+             MAIN PAGE
+        ============================================== -->
+      <main class="main-content">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              type="button"
+              class="menu-toggle"
+              id="menuToggleBtn"
+              aria-label="Open navigation"
+            >
+              ☰
+            </button>
+            <div>
+              <p class="breadcrumb">
+                Staff Portal / Clearance Work / Student Details
+              </p>
+              <h1>Student Details</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-date" id="currentDate">Staff Workspace</div>
+            <button
+              type="button"
+              class="profile-button"
+              id="topbarProfileBtn"
+              aria-label="Open staff profile"
+            >
+              <span class="avatar avatar-small" id="topbarAvatar">S</span>
+              <span class="profile-button-details">
+                <strong id="topbarStaffName">Staff Member</strong>
+                <small id="topbarStaffRole">Clearance Officer</small>
+              </span>
+              <span class="dropdown-arrow" aria-hidden="true">⌄</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="content-wrapper">
+          <!-- Page introduction and navigation -->
+          <section class="page-intro" aria-labelledby="studentDetailsPageTitle">
+            <div>
+              <span class="eyebrow">STUDENT CLEARANCE RECORD</span>
+              <h2 id="studentDetailsPageTitle">Student Details</h2>
+              <p>
+                View the student's identity, submitted documents and clearance
+                history for your assigned stage.
+              </p>
+            </div>
+            <a
+              class="button button-secondary"
+              id="backToDashboardBtn"
+              href="staff-dashboard.html#clearance-work"
+            >
+              <span class="button-icon" aria-hidden="true">←</span>
+              Back to Clearance Work
+            </a>
+          </section>
+
+          <!-- State and feedback messages -->
+          <div
+            class="notice notice-info"
+            id="pageLoadingNotice"
+            role="status"
+            aria-live="polite"
+          >
+            Loading student clearance details…
+          </div>
+
+          <div
+            class="notice notice-success"
+            id="otpVerifiedNotice"
+            role="status"
+            aria-live="polite"
+            hidden
+          >
+            Stage OTP verified. The student's details are open for review.
+          </div>
+
+          <div
+            class="notice notice-error"
+            id="pageErrorNotice"
+            role="alert"
+            hidden
+          ></div>
+
+          <div
+            class="notice"
+            id="pageMessageNotice"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+          <!-- =====================================
+                     STUDENT SUMMARY CARD
+                ====================================== -->
+          <section
+            class="student-summary-card"
+            aria-labelledby="studentFullName"
+          >
+            <div class="student-summary-banner"></div>
+            <div class="student-summary-content">
+              <div class="student-avatar" id="studentAvatar" aria-hidden="true">
+                S
+              </div>
+
+              <div class="student-summary-main">
+                <div class="student-name-row">
+                  <div>
+                    <h2 id="studentFullName">Student name</h2>
+                    <p class="student-reg-number">
+                      Registration Number: <strong id="studentRegNo">—</strong>
+                    </p>
+                  </div>
+                  <span
+                    class="status-pill status-default"
+                    id="overallClearanceStatus"
+                    >Loading status</span
+                  >
+                </div>
+
+                <div class="student-summary-meta">
+                  <span
+                    ><span class="meta-label">Current Stage:</span>
+                    <strong id="studentCurrentStage">—</strong></span
+                  >
+                  <span
+                    ><span class="meta-label">Assigned to You:</span>
+                    <strong id="studentAssignedStage">—</strong></span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- =====================================
+                     STUDENT INFORMATION
+                ====================================== -->
+          <section
+            class="content-section"
+            aria-labelledby="studentInformationHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="studentInformationHeading">Student Information</h2>
+                <p>
+                  Personal and academic information on the student's record.
+                </p>
+              </div>
+            </div>
+
+            <div class="information-grid" id="studentInformationGrid">
+              <article class="information-item">
+                <span>First Name</span>
+                <strong id="studentFirstName">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Surname</span>
+                <strong id="studentSurname">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Other Names</span>
+                <strong id="studentOtherNames">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Email Address</span>
+                <strong id="studentEmail">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Phone Number</span>
+                <strong id="studentPhone">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Gender</span>
+                <strong id="studentGender">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Faculty</span>
+                <strong id="studentFaculty">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Department</span>
+                <strong id="studentDepartment">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Admission Year</span>
+                <strong id="studentAdmissionYear">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Study Category</span>
+                <strong id="studentStudyCategory">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Student Account Status</span>
+                <strong id="studentAccountStatus">—</strong>
+              </article>
+              <article class="information-item">
+                <span>Clearance Created</span>
+                <strong id="clearanceCreatedAt">—</strong>
+              </article>
+            </div>
+          </section>
+
+          <!-- =====================================
+                     CLEARANCE PROGRESS
+                ====================================== -->
+          <section
+            class="content-section"
+            aria-labelledby="clearanceProgressHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="clearanceProgressHeading">Clearance Progress</h2>
+                <p>Progress across the official clearance stages.</p>
+              </div>
+              <span class="progress-count" id="clearanceProgressCount"
+                >0 of 7 stages approved</span
+              >
+            </div>
+
+            <div class="progress-card">
+              <div
+                class="progress-bar-track"
+                role="progressbar"
+                id="clearanceProgressBar"
+                aria-label="Clearance completion progress"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <div class="progress-bar-fill" id="clearanceProgressFill"></div>
+              </div>
+
+              <div
+                class="stage-timeline"
+                id="stageTimeline"
+                aria-label="Clearance stages"
+              >
+                <div class="stage-timeline-item" data-stage="finance">
+                  <span class="stage-marker">1</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Finance</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+                <div class="stage-timeline-item" data-stage="department">
+                  <span class="stage-marker">2</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Department</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+                <div class="stage-timeline-item" data-stage="faculty">
+                  <span class="stage-marker">3</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Faculty</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+                <div class="stage-timeline-item" data-stage="library">
+                  <span class="stage-marker">4</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Library</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+                <div class="stage-timeline-item" data-stage="health">
+                  <span class="stage-marker">5</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Health</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+                <div class="stage-timeline-item" data-stage="student_affairs">
+                  <span class="stage-marker">6</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Student Affairs</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+                <div class="stage-timeline-item" data-stage="final">
+                  <span class="stage-marker">7</span>
+                  <div class="stage-timeline-copy">
+                    <strong>Final Clearance</strong>
+                    <small class="stage-timeline-status">Not reviewed</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- =====================================
+                     CURRENT STAGE REVIEW SUMMARY
+                ====================================== -->
+          <section
+            class="content-section"
+            aria-labelledby="currentStageHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="currentStageHeading">Current Stage Review</h2>
+                <p>
+                  Review information and submission status for your assigned
+                  stage.
+                </p>
+              </div>
+            </div>
+
+            <div class="current-stage-card">
+              <div class="current-stage-icon" aria-hidden="true">▤</div>
+              <div class="current-stage-copy">
+                <span class="meta-label">STAGE ASSIGNED TO YOUR ACCOUNT</span>
+                <h3 id="currentStageName">—</h3>
+                <p id="currentStageDescription">
+                  The assigned stage and its review status will appear here.
+                </p>
+              </div>
+              <div class="current-stage-state">
+                <span class="meta-label">STAGE STATUS</span>
+                <span class="status-pill status-default" id="currentStageStatus"
+                  >—</span
+                >
+              </div>
+            </div>
+
+            <div class="review-metadata-grid">
+              <div class="review-metadata-item">
+                <span>Latest Document Submission</span>
+                <strong id="stageSubmittedAt">—</strong>
+              </div>
+              <div class="review-metadata-item">
+                <span>Last Reviewed By</span>
+                <strong id="stageReviewedBy">—</strong>
+              </div>
+              <div class="review-metadata-item">
+                <span>Last Review Date</span>
+                <strong id="stageReviewedAt">—</strong>
+              </div>
+              <div class="review-metadata-item">
+                <span>Review Eligibility</span>
+                <strong id="stageReviewEligibility"
+                  >Checking submission…</strong
+                >
+              </div>
+            </div>
+          </section>
+
+          <!-- =====================================
+                     DOCUMENTS
+                ====================================== -->
+          <section
+            class="content-section"
+            aria-labelledby="studentDocumentsHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="studentDocumentsHeading">Submitted Documents</h2>
+                <p>
+                  Open or download documents associated with this student's
+                  clearance.
+                </p>
+              </div>
+              <span class="progress-count" id="studentDocumentCount"
+                >0 documents</span
+              >
+            </div>
+
+            <div class="table-card">
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Document Name</th>
+                      <th>Clearance Stage</th>
+                      <th>File Type</th>
+                      <th>Uploaded At</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="studentDocumentsTableBody">
+                    <tr>
+                      <td colspan="6" class="table-empty">
+                        Loading student documents…
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- =====================================
+                     REJECTION / CORRECTION NOTICE
+                ====================================== -->
+          <section
+            class="content-section"
+            id="rejectionDetailsSection"
+            aria-labelledby="rejectionDetailsHeading"
+            hidden
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="rejectionDetailsHeading">
+                  Rejection and Correction Details
+                </h2>
+                <p>
+                  Feedback recorded for a document that was returned for
+                  correction.
+                </p>
+              </div>
+            </div>
+
+            <article class="rejection-details-card">
+              <div class="rejection-details-icon" aria-hidden="true">!</div>
+              <div>
+                <span class="meta-label">RECORDED REJECTION REASON</span>
+                <p id="studentRejectionReason">
+                  No rejection reason has been recorded.
+                </p>
+                <div class="rejection-metadata">
+                  <span
+                    >Reviewed by:
+                    <strong id="rejectionReviewedBy">—</strong></span
+                  >
+                  <span>Date: <strong id="rejectionReviewedAt">—</strong></span>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <!-- =====================================
+                     REVIEW HISTORY
+                ====================================== -->
+          <section
+            class="content-section"
+            aria-labelledby="reviewHistoryHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="reviewHistoryHeading">Clearance Review History</h2>
+                <p>
+                  Recorded review decisions and stage progression for this
+                  student.
+                </p>
+              </div>
+              <span class="progress-count" id="reviewHistoryCount"
+                >0 entries</span
+              >
+            </div>
+
+            <div class="table-card">
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date and Time</th>
+                      <th>Stage</th>
+                      <th>Action</th>
+                      <th>Officer</th>
+                      <th>Comment / Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reviewHistoryTableBody">
+                    <tr>
+                      <td colspan="5" class="table-empty">
+                        Loading review history…
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- =====================================
+                     ACTIONS AVAILABLE FOR THIS STAGE
+                ====================================== -->
+          <section
+            class="content-section"
+            aria-labelledby="studentActionsHeading"
+          >
+            <div class="section-heading">
+              <div>
+                <h2 id="studentActionsHeading">Review Actions</h2>
+                <p>
+                  Actions are enabled only when the student's submission can be
+                  reviewed by your assigned stage.
+                </p>
+              </div>
+            </div>
+
+            <div class="review-actions-card">
+              <div class="review-actions-copy">
+                <h3 id="reviewActionTitle">
+                  Review eligibility is being checked
+                </h3>
+                <p id="reviewActionDescription">
+                  The system will verify your stage assignment and the current
+                  document status before enabling review actions.
+                </p>
+              </div>
+
+              <div class="review-actions-buttons">
+                <button
+                  type="button"
+                  class="button button-primary"
+                  id="approveStudentBtn"
+                  hidden
+                >
+                  <span class="button-icon" aria-hidden="true">✓</span>
+                  Approve Submission
+                </button>
+                <button
+                  type="button"
+                  class="button button-danger"
+                  id="rejectStudentBtn"
+                  hidden
+                >
+                  <span class="button-icon" aria-hidden="true">×</span>
+                  Reject Submission
+                </button>
+                <button
+                  type="button"
+                  class="button button-secondary"
+                  id="refreshStudentDetailsBtn"
+                >
+                  <span class="button-icon" aria-hidden="true">↻</span>
+                  Refresh Details
+                </button>
+              </div>
+            </div>
+
+            <div class="notice notice-info" id="reviewRuleNotice" role="status">
+              A stage can be approved or rejected only after the student has
+              submitted a document for that stage and its status is under
+              review. Rejection requires a reason.
+            </div>
+          </section>
+
+          <!-- Toast notifications populated by JavaScript -->
+          <div
+            class="toast-container"
+            id="toastContainer"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+
+          <footer class="dashboard-footer">
+            <p>
+              &copy; <span id="footerYear"></span> UniClear Student Clearance
+              System
+            </p>
+            <span>Staff Portal</span>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/student-details.js"></script>
+  </body>
+</html>

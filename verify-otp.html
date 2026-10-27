@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Verify OTP | UniClear</title>
+
+    <link rel="stylesheet" href="css/verify-otp.css" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: #f3f6fb;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #17243a;
+      }
+
+      .page-container {
+        width: 100%;
+        max-width: 470px;
+      }
+
+      .brand {
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      .brand-icon {
+        width: 58px;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px;
+        border-radius: 16px;
+        background: #102b52;
+        color: #ffffff;
+        font-size: 25px;
+        font-weight: bold;
+      }
+
+      .brand h1 {
+        font-size: 27px;
+        color: #102b52;
+        margin-bottom: 6px;
+      }
+
+      .brand p {
+        color: #718096;
+        font-size: 14px;
+      }
+
+      .form-card {
+        padding: 34px;
+        background: #ffffff;
+        border: 1px solid #e4eaf2;
+        border-radius: 18px;
+        box-shadow: 0 12px 35px rgba(16, 43, 82, 0.08);
+      }
+
+      .form-card h2 {
+        margin-bottom: 9px;
+        font-size: 23px;
+        color: #17243a;
+      }
+
+      .intro {
+        margin-bottom: 26px;
+        color: #718096;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .form-group {
+        margin-bottom: 19px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #34445d;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1px solid #d6deea;
+        border-radius: 9px;
+        outline: none;
+        background: #ffffff;
+        color: #17243a;
+        font-size: 15px;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: #2463eb;
+        box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.12);
+      }
+
+      .form-group input::placeholder {
+        color: #a0aec0;
+      }
+
+      .otp-input {
+        letter-spacing: 7px;
+        text-align: center;
+        font-size: 21px !important;
+        font-weight: 700;
+      }
+
+      .field-help {
+        display: block;
+        margin-top: 7px;
+        color: #718096;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .message {
+        display: none;
+        margin-bottom: 18px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+      }
+
+      .message.success {
+        display: block;
+        color: #166534;
+        background: #dcfce7;
+        border: 1px solid #bbf7d0;
+      }
+
+      .message.error {
+        display: block;
+        color: #b42318;
+        background: #fee4e2;
+        border: 1px solid #fecdca;
+      }
+
+      .message.info {
+        display: block;
+        color: #1d4ed8;
+        background: #dbeafe;
+        border: 1px solid #bfdbfe;
+      }
+
+      .primary-button {
+        width: 100%;
+        min-height: 49px;
+        border: none;
+        border-radius: 9px;
+        background: #164eaa;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+
+      .primary-button:hover {
+        background: #103c85;
+      }
+
+      .primary-button:active {
+        transform: scale(0.99);
+      }
+
+      .primary-button:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+
+      .back-link {
+        display: block;
+        margin-top: 22px;
+        text-align: center;
+        color: #164eaa;
+        font-size: 14px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      .security-note {
+        margin-top: 22px;
+        text-align: center;
+        color: #8a97aa;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 16px;
+        }
+
+        .form-card {
+          padding: 24px 20px;
+        }
+
+        .brand h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="page-container">
+      <header class="brand">
+        <div class="brand-icon" aria-hidden="true">U</div>
+        <h1>UniClear</h1>
+        <p>Online Student Clearance System</p>
+      </header>
+
+      <section class="form-card">
+        <h2>Verify OTP</h2>
+
+        <p class="intro">
+          Select your account type and enter the OTP sent to you. You can then
+          set a new password for your account.
+        </p>
+
+        <div
+          id="message"
+          class="message"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <form id="resetPasswordForm" novalidate>
+          <!-- Account type -->
+          <div class="form-group">
+            <label for="accountType">Account Type</label>
+
+            <select id="accountType" name="account_type" required>
+              <option value="">Select account type</option>
+              <option value="student">Student</option>
+              <option value="staff">Staff</option>
+            </select>
+          </div>
+
+          <!-- Student registration number -->
+          <div class="form-group" id="studentIdentifierGroup" hidden>
+            <label for="reg_no">Student Registration Number</label>
+
+            <input
+              type="text"
+              id="reg_no"
+              name="reg_no"
+              placeholder="Enter your registration number"
+              autocomplete="username"
+              disabled
+            />
+          </div>
+
+          <!-- Staff ID -->
+          <div class="form-group" id="staffIdentifierGroup" hidden>
+            <label for="staff_id">Staff ID</label>
+
+            <input
+              type="text"
+              id="staff_id"
+              name="staff_id"
+              placeholder="Enter your staff ID"
+              autocomplete="username"
+              disabled
+            />
+          </div>
+
+          <!-- OTP -->
+          <div class="form-group">
+            <label for="otp">One-Time Password (OTP)</label>
+
+            <input
+              type="text"
+              id="otp"
+              name="otp"
+              class="otp-input"
+              placeholder="000000"
+              inputmode="numeric"
+              pattern="[0-9]{6}"
+              minlength="6"
+              maxlength="6"
+              autocomplete="one-time-code"
+              required
+            />
+
+            <small class="field-help">
+              Enter the six-digit code sent to your registered email.
+            </small>
+          </div>
+
+          <!-- New password -->
+          <div class="form-group">
+            <label for="new_password">New Password</label>
+
+            <input
+              type="password"
+              id="new_password"
+              name="new_password"
+              placeholder="Enter your new password"
+              minlength="8"
+              autocomplete="new-password"
+              required
+            />
+
+            <small class="field-help"> Use at least 8 characters. </small>
+          </div>
+
+          <!-- Confirm new password -->
+          <div class="form-group">
+            <label for="confirm_password">Confirm New Password</label>
+
+            <input
+              type="password"
+              id="confirm_password"
+              name="confirm_password"
+              placeholder="Re-enter your new password"
+              minlength="8"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" id="resetPasswordBtn" class="primary-button">
+            Verify OTP &amp; Reset Password
+          </button>
+        </form>
+
+        <a href="login.html" class="back-link"> &larr; Back to Login </a>
+      </section>
+
+      <p class="security-note">
+        Keep your OTP private. UniClear will never ask you to share your
+        password with another person.
+      </p>
+    </main>
+
+    <script src="js/verify-otp.js"></script>
+  </body>
+</html>

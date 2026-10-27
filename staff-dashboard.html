@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="UniClear Staff Clearance Dashboard for managing student clearance reviews."
+    />
+
+    <title>Staff Dashboard | UniClear</title>
+
+    <!-- Staff Dashboard Stylesheet -->
+    <link rel="stylesheet" href="css/staff-dashboard.css" />
+  </head>
+
+  <body>
+    <div class="dashboard-layout">
+      <!-- ==========================================
+           SIDEBAR NAVIGATION
+      =========================================== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-logo">U</div>
+
+          <div class="brand-details">
+            <h2>UniClear</h2>
+            <p>Staff Portal</p>
+          </div>
+
+          <button
+            type="button"
+            class="sidebar-close"
+            id="closeSidebarBtn"
+            aria-label="Close navigation"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="sidebar-section-label">WORKSPACE</div>
+
+        <nav class="sidebar-navigation" aria-label="Staff navigation">
+          <a href="#dashboard" class="nav-link active" data-section="dashboard">
+            <span class="nav-icon">▦</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a
+            href="#clearance-work"
+            class="nav-link"
+            data-section="clearance-work"
+          >
+            <span class="nav-icon">▤</span>
+            <span>Clearance Work</span>
+            <span class="nav-badge" id="pendingNavCount" hidden>0</span>
+          </a>
+
+          <!-- NEW: Direct link to the Current-Stage Students page.
+               Do not add data-section here because this link must
+               navigate to a separate HTML page. -->
+          <a href="current-stage-students.html" class="nav-link">
+            <span class="nav-icon">♙</span>
+            <span>Current-Stage Students</span>
+          </a>
+
+          <a href="#stage-otp" class="nav-link" data-section="stage-otp">
+            <span class="nav-icon">⌑</span>
+            <span>Verify Stage OTP</span>
+          </a>
+
+          <a
+            href="#staff-profile"
+            class="nav-link"
+            data-section="staff-profile"
+          >
+            <span class="nav-icon">◉</span>
+            <span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-section-label">ACCOUNT</div>
+
+        <nav class="sidebar-navigation" aria-label="Account navigation">
+          <a
+            href="#change-password"
+            class="nav-link"
+            data-section="change-password"
+          >
+            <span class="nav-icon">♙</span>
+            <span>Change Password</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="sidebar-user">
+            <div class="avatar" id="sidebarAvatar">S</div>
+
+            <div class="sidebar-user-details">
+              <strong id="sidebarStaffName">Loading profile...</strong>
+              <span id="sidebarStaffRole">Staff Member</span>
+            </div>
+          </div>
+
+          <button type="button" class="logout-button" id="logoutBtn">
+            <span class="nav-icon">↪</span>
+            <span>Log Out</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Mobile Sidebar Overlay -->
+      <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+      <!-- ==========================================
+           MAIN CONTENT
+      =========================================== -->
+      <main class="main-content">
+        <!-- Top Header -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              type="button"
+              class="menu-toggle"
+              id="menuToggleBtn"
+              aria-label="Open navigation"
+            >
+              ☰
+            </button>
+
+            <div>
+              <p class="breadcrumb">Staff Portal / Workspace</p>
+              <h1 id="pageTitle">Dashboard</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-date" id="currentDate">Staff Workspace</div>
+
+            <button
+              type="button"
+              class="profile-button"
+              id="topbarProfileBtn"
+              aria-label="View staff profile"
+            >
+              <span class="avatar avatar-small" id="topbarAvatar">S</span>
+
+              <span class="profile-button-details">
+                <strong id="topbarStaffName">Staff Member</strong>
+                <small id="topbarStaffRole">Clearance Officer</small>
+              </span>
+
+              <span class="dropdown-arrow">⌄</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="content-wrapper">
+          <!-- ======================================
+               DASHBOARD SECTION
+          ======================================= -->
+          <section
+            class="dashboard-section"
+            id="dashboard"
+            data-page-title="Dashboard"
+          >
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+              <div class="welcome-text">
+                <span class="eyebrow">STAFF WORKSPACE</span>
+
+                <h2 id="welcomeHeading">Welcome back!</h2>
+
+                <p id="welcomeMessage">Your clearance workspace is ready.</p>
+
+                <div class="welcome-meta">
+                  <span class="status-indicator"></span>
+                  <span id="welcomeStage">Assigned stage: Loading...</span>
+                </div>
+              </div>
+
+              <div class="welcome-illustration" aria-hidden="true">
+                <div class="illustration-circle">
+                  <span class="illustration-document">✓</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Change Warning -->
+            <div
+              class="notice notice-warning"
+              id="passwordChangeNotice"
+              hidden
+              role="status"
+            >
+              <div class="notice-icon">!</div>
+
+              <div class="notice-content">
+                <strong>Password update required</strong>
+
+                <p>
+                  Please change your password before continuing with your staff
+                  activities.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                class="button button-secondary button-small"
+                data-open-section="change-password"
+              >
+                Change Password
+              </button>
+            </div>
+
+            <!-- Dashboard Statistics -->
+            <div class="section-heading">
+              <div>
+                <h2>Clearance Overview</h2>
+                <p>Summary of your clearance review activity.</p>
+              </div>
+
+              <button
+                type="button"
+                class="button button-secondary"
+                id="refreshDashboardBtn"
+              >
+                <span class="button-icon">↻</span>
+                Refresh
+              </button>
+            </div>
+
+            <div class="stats-grid">
+              <article class="stat-card stat-pending">
+                <div class="stat-card-top">
+                  <span class="stat-label">Pending Reviews</span>
+                  <span class="stat-icon">◷</span>
+                </div>
+
+                <strong class="stat-value" id="pendingReviewsCount"> — </strong>
+
+                <p>Submissions awaiting your review</p>
+              </article>
+
+              <article class="stat-card stat-approved">
+                <div class="stat-card-top">
+                  <span class="stat-label">Approved</span>
+                  <span class="stat-icon">✓</span>
+                </div>
+
+                <strong class="stat-value" id="approvedReviewsCount">
+                  —
+                </strong>
+
+                <p>Clearance decisions approved</p>
+              </article>
+
+              <article class="stat-card stat-rejected">
+                <div class="stat-card-top">
+                  <span class="stat-label">Rejected</span>
+                  <span class="stat-icon">!</span>
+                </div>
+
+                <strong class="stat-value" id="rejectedReviewsCount">
+                  —
+                </strong>
+
+                <p>Submissions returned for correction</p>
+              </article>
+
+              <article class="stat-card stat-completed">
+                <div class="stat-card-top">
+                  <span class="stat-label">Completed</span>
+                  <span class="stat-icon">◆</span>
+                </div>
+
+                <strong class="stat-value" id="completedClearancesCount">
+                  —
+                </strong>
+
+                <p>Overall clearance completions</p>
+              </article>
+            </div>
+
+            <!-- Staff Assignment -->
+            <div class="section-heading assignment-heading">
+              <div>
+                <h2>Your Assignment</h2>
+                <p>Your role and assigned clearance responsibilities.</p>
+              </div>
+            </div>
+
+            <article class="assignment-card">
+              <div class="assignment-icon">▤</div>
+
+              <div class="assignment-details">
+                <span class="muted-label"> ASSIGNED CLEARANCE STAGE </span>
+
+                <h3 id="assignedStageName">Loading assignment...</h3>
+
+                <p id="assignedStageDescription">
+                  Your assigned clearance stage will appear here.
+                </p>
+              </div>
+
+              <div class="assignment-status">
+                <span class="status-pill status-active" id="accountStatusBadge">
+                  Checking account
+                </span>
+              </div>
+            </article>
+
+            <!-- Recent Clearance Work -->
+            <div class="section-heading recent-work-heading">
+              <div>
+                <h2>Recent Clearance Work</h2>
+                <p>Students whose submissions need attention.</p>
+              </div>
+
+              <button
+                type="button"
+                class="button button-primary"
+                data-open-section="clearance-work"
+              >
+                View All Work
+                <span class="button-icon">→</span>
+              </button>
+            </div>
+
+            <div class="table-card">
+              <div class="table-toolbar">
+                <div>
+                  <h3>Student Submissions</h3>
+                  <p>Review documents submitted to your stage.</p>
+                </div>
+
+                <span class="table-count" id="recentWorkCount">
+                  Loading...
+                </span>
+              </div>
+
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Registration Number</th>
+                      <th>Department</th>
+                      <th>Submitted</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="recentClearanceTableBody">
+                    <tr>
+                      <td colspan="6" class="table-empty">
+                        No recent clearance records have been loaded. Use
+                        Refresh to try again.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-footer" id="recentWorkFooter">
+                <span>Showing recent clearance activity</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ======================================
+               CLEARANCE WORK SECTION
+          ======================================= -->
+          <section
+            class="dashboard-section"
+            id="clearance-work"
+            data-page-title="Clearance Work"
+            hidden
+          >
+            <div class="page-intro">
+              <div>
+                <span class="eyebrow">STAGE MANAGEMENT</span>
+
+                <h2>Clearance Work</h2>
+
+                <p>
+                  Review student submissions assigned to your clearance stage.
+                </p>
+              </div>
+
+              <!-- NEW: Open the separate Current-Stage Students page -->
+              <div class="clearance-work-page-actions">
+                <a
+                  href="current-stage-students.html"
+                  class="button button-primary"
+                >
+                  <span class="button-icon">♙</span>
+                  View Current-Stage Students
+                  <span class="button-icon">→</span>
+                </a>
+
+                <button
+                  type="button"
+                  class="button button-secondary"
+                  id="refreshClearanceWorkBtn"
+                >
+                  <span class="button-icon">↻</span>
+                  Refresh Records
+                </button>
+              </div>
+            </div>
+
+            <!-- Work Filters -->
+            <div class="filter-card">
+              <div class="filter-field">
+                <label for="clearanceSearch">Search Students</label>
+
+                <input
+                  type="search"
+                  id="clearanceSearch"
+                  placeholder="Search name or registration number"
+                />
+              </div>
+
+              <div class="filter-field">
+                <label for="clearanceStatusFilter">Status</label>
+
+                <select id="clearanceStatusFilter">
+                  <option value="all">All statuses</option>
+                  <option value="under_review">Under review</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+
+            <div
+              class="notice notice-info"
+              id="clearanceWorkInfo"
+              role="status"
+            >
+              This list displays student submissions associated with your
+              assigned clearance stage.
+            </div>
+
+            <div class="table-card">
+              <div class="table-toolbar">
+                <div>
+                  <h3>Assigned Student Submissions</h3>
+
+                  <p>
+                    Only work permitted for your assigned stage should be
+                    available for review.
+                  </p>
+                </div>
+
+                <span class="table-count" id="clearanceWorkCount">
+                  0 records
+                </span>
+              </div>
+
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Student Name</th>
+                      <th>Registration Number</th>
+                      <th>Department</th>
+                      <th>Document</th>
+                      <th>Submitted At</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="clearanceWorkTableBody">
+                    <tr>
+                      <td colspan="7" class="table-empty">
+                        No records loaded yet.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- ======================================
+               VERIFY STAGE OTP SECTION
+          ======================================= -->
+          <section
+            class="dashboard-section"
+            id="stage-otp"
+            data-page-title="Verify Stage OTP"
+            hidden
+          >
+            <div class="page-intro">
+              <div>
+                <span class="eyebrow">CLEARANCE PROGRESSION</span>
+
+                <h2>Verify Stage OTP</h2>
+
+                <p>
+                  Verify a stage-transfer OTP to advance a student's clearance
+                  to the next stage.
+                </p>
+              </div>
+            </div>
+
+            <div class="otp-layout">
+              <article class="information-card">
+                <div class="large-icon">⌑</div>
+
+                <h3>Stage Verification</h3>
+
+                <p>
+                  When a clearance stage is approved, the student receives an
+                  OTP for the next stage. The officer assigned to that next
+                  stage verifies the OTP.
+                </p>
+
+                <ul class="information-list">
+                  <li>Confirm the student's registration number.</li>
+                  <li>Enter the OTP supplied for the stage transfer.</li>
+                  <li>Submit the code for backend verification.</li>
+                  <li>Review the server's result before proceeding.</li>
+                </ul>
+              </article>
+
+              <article class="form-card">
+                <div class="form-card-heading">
+                  <h3>Verify Student OTP</h3>
+                  <p>Enter the student's details and stage OTP.</p>
+                </div>
+
+                <div
+                  class="notice"
+                  id="stageOtpMessage"
+                  role="status"
+                  hidden
+                ></div>
+
+                <form id="stageOtpForm" novalidate>
+                  <div class="form-field">
+                    <label for="stageOtpRegNo">
+                      Student Registration Number
+                    </label>
+
+                    <input
+                      type="text"
+                      id="stageOtpRegNo"
+                      name="reg_no"
+                      placeholder="Enter registration number"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="stageOtpCode">Stage OTP</label>
+
+                    <input
+                      type="text"
+                      id="stageOtpCode"
+                      name="otp"
+                      inputmode="numeric"
+                      autocomplete="one-time-code"
+                      placeholder="Enter stage OTP"
+                      required
+                    />
+
+                    <small>
+                      Enter the code provided for the student's clearance stage
+                      transfer.
+                    </small>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="button button-primary button-full"
+                    id="verifyStageOtpBtn"
+                  >
+                    Verify Stage OTP
+                  </button>
+                </form>
+              </article>
+            </div>
+          </section>
+
+          <!-- ======================================
+               STAFF PROFILE SECTION
+          ======================================= -->
+          <section
+            class="dashboard-section"
+            id="staff-profile"
+            data-page-title="My Profile"
+            hidden
+          >
+            <div class="page-intro">
+              <div>
+                <span class="eyebrow">ACCOUNT INFORMATION</span>
+
+                <h2>My Staff Profile</h2>
+
+                <p>View your registered identity and clearance assignment.</p>
+              </div>
+
+              <button
+                type="button"
+                class="button button-secondary"
+                id="refreshProfileBtn"
+              >
+                <span class="button-icon">↻</span>
+                Refresh Profile
+              </button>
+            </div>
+
+            <article class="profile-card">
+              <div class="profile-banner"></div>
+
+              <div class="profile-main">
+                <div class="profile-avatar" id="profileAvatar">S</div>
+
+                <div class="profile-heading">
+                  <h3 id="profileFullName">Loading staff profile...</h3>
+
+                  <p id="profileRole">Clearance Officer</p>
+
+                  <span
+                    class="status-pill status-active"
+                    id="profileAccountStatus"
+                  >
+                    Checking account
+                  </span>
+                </div>
+              </div>
+
+              <div class="profile-details-grid">
+                <div class="profile-detail">
+                  <span>Staff ID</span>
+                  <strong id="profileStaffId">—</strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span>Email Address</span>
+                  <strong id="profileEmail">—</strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span>Department</span>
+                  <strong id="profileDepartment">—</strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span>Faculty</span>
+                  <strong id="profileFaculty">—</strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span>Assigned Stage</span>
+                  <strong id="profileAssignedStage">—</strong>
+                </div>
+
+                <div class="profile-detail">
+                  <span>Account Type</span>
+                  <strong>Staff</strong>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <!-- ======================================
+               CHANGE PASSWORD SECTION
+          ======================================= -->
+          <section
+            class="dashboard-section"
+            id="change-password"
+            data-page-title="Change Password"
+            hidden
+          >
+            <div class="page-intro">
+              <div>
+                <span class="eyebrow">ACCOUNT SECURITY</span>
+
+                <h2>Change Password</h2>
+
+                <p>Update your staff account password securely.</p>
+              </div>
+            </div>
+
+            <article class="form-card password-form-card">
+              <div class="form-card-heading">
+                <h3>Update Your Password</h3>
+
+                <p>Enter your current password and choose a new one.</p>
+              </div>
+
+              <div
+                class="notice"
+                id="changePasswordMessage"
+                role="status"
+                hidden
+              ></div>
+
+              <form id="changePasswordForm" novalidate>
+                <!-- Current Password -->
+                <div class="form-field password-field">
+                  <label for="currentPassword">Current Password</label>
+
+                  <div class="password-input-wrapper">
+                    <input
+                      type="password"
+                      id="currentPassword"
+                      name="current_password"
+                      autocomplete="current-password"
+                      placeholder="Enter current password"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="toggleCurrentPassword"
+                      aria-label="Show current password"
+                      aria-controls="currentPassword"
+                      aria-pressed="false"
+                    >
+                      <svg
+                        class="password-eye-icon"
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"
+                        />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- New Password -->
+                <div class="form-field password-field">
+                  <label for="newPassword">New Password</label>
+
+                  <div class="password-input-wrapper">
+                    <input
+                      type="password"
+                      id="newPassword"
+                      name="new_password"
+                      autocomplete="new-password"
+                      minlength="8"
+                      placeholder="Enter new password"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="toggleNewPassword"
+                      aria-label="Show new password"
+                      aria-controls="newPassword"
+                      aria-pressed="false"
+                    >
+                      <svg
+                        class="password-eye-icon"
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"
+                        />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <small>Use at least 8 characters.</small>
+                </div>
+
+                <!-- Confirm New Password -->
+                <div class="form-field password-field">
+                  <label for="confirmPassword">Confirm New Password</label>
+
+                  <div class="password-input-wrapper">
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      name="confirm_password"
+                      autocomplete="new-password"
+                      minlength="8"
+                      placeholder="Confirm new password"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      id="toggleConfirmPassword"
+                      aria-label="Show confirm password"
+                      aria-controls="confirmPassword"
+                      aria-pressed="false"
+                    >
+                      <svg
+                        class="password-eye-icon"
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"
+                        />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Submit Password Change -->
+                <button
+                  type="submit"
+                  class="button button-primary button-full"
+                  id="changeStaffPasswordBtn"
+                >
+                  Update Password
+                </button>
+              </form>
+            </article>
+          </section>
+
+          <!-- ======================================
+               GLOBAL NOTIFICATION AREA
+          ======================================= -->
+          <div
+            class="toast-container"
+            id="toastContainer"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+
+          <!-- Footer -->
+          <footer class="dashboard-footer">
+            <p>
+              &copy; <span id="footerYear"></span>
+              UniClear Student Clearance System
+            </p>
+
+            <span>Staff Portal</span>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <!-- Staff Dashboard JavaScript -->
+    <script src="js/staff-dashboard.js"></script>
+  </body>
+</html>
